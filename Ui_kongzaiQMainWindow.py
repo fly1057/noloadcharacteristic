@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(919, 621)
+        MainWindow.resize(1101, 627)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.groupBox_NoLoadCalculate = QtWidgets.QGroupBox(self.centralwidget)
@@ -111,7 +111,7 @@ class Ui_MainWindow(object):
         self.lineEdit_LimiterCalculateSG12.setObjectName("lineEdit_LimiterCalculateSG12")
         self.gridLayout_2.addWidget(self.lineEdit_LimiterCalculateSG12, 4, 3, 1, 1)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(660, 10, 451, 401))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(660, 10, 421, 401))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout_mpl = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout_mpl.setContentsMargins(0, 0, 0, 0)
@@ -326,7 +326,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_3.addLayout(self.gridLayout)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 919, 23))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1101, 23))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
