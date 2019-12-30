@@ -16,7 +16,7 @@ class Main(QtWidgets.QMainWindow):
         # 然后将canvas加入到之前在Qt designer中建立的layout中去，关键是要在设计时留一个空出来
         self.figure = Figure()
         self.canvas = FigureCanvas(self.figure)
-        self.ui.verticalLayout_mpl.addWidget(self.canvas)
+        self.ui.verticalLayout.addWidget(self.canvas)
         self.Reset()
         self.show()
         
