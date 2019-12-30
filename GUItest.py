@@ -1,4 +1,5 @@
 from PyQt5.uic import loadUiType
+from PyQt5 import QtCore, QtGui, QtWidgets
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import (FigureCanvasAgg as
                                                 FigureCanvas,
@@ -15,8 +16,7 @@ class Main(QMainWindow, Ui_MainWindow):
 
 if __name__ == "__main__":
     import sys
-    from PyQt5 import QtGui
-    app = QtGui.QGuiApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     main = Main()
     main.show()
     sys.exit(app.exec_())
