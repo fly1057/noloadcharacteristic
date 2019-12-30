@@ -41,7 +41,7 @@ class Main(QtWidgets.QMainWindow):
         fig1 = Figure()
         ax1f1 = fig1.add_subplot(111)
         ax1f1.pcolormesh(np.random.rand(10,10))
-        self.addmpl(fig1)
+        self.addmpl(fig1)  
 
 
 if __name__ == "__main__":
