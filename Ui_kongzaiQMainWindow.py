@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'h:\L330backup\file\work_index\generalfile\github\noloadcharacteristic\kongzaiQMainWindow.ui'
+# Form implementation generated from reading ui file 'd:\setup\github\noloadcharacteristic\kongzaiQMainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
