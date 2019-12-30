@@ -12,6 +12,13 @@ class Main(QtWidgets.QMainWindow):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        # 在这里引入matplotlib的代码结构，首先建立figure，然后建立canvas，其中canvas是子类
+        # 然后将canvas加入到之前在Qt designer中建立的layout中去，关键是要在设计时留一个空出来
+        self.figure = Figure()
+        self.canvas = FigureCanvas(self.figure)
+        self.ui.verticalLayout_mpl.addWidget(self.canvas)
+        self.Reset()
+        self.show()
         
 
 

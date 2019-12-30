@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGroupBox" name="groupBox_2">
+   <widget class="QGroupBox" name="groupBox_NoLoadCalculate">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -46,26 +46,26 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="lineEdit_NoLoadCalculateLinearScope"/>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="pushButton_NoLoadCalculateAutoCalculate">
         <property name="text">
          <string>自动计算绘图</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButton_NoLoadCalculateReadCSV">
         <property name="text">
          <string>读取CSV</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="pushButton_NoLoadCalculateSaveCSV">
         <property name="text">
          <string>保存CSV</string>
         </property>
@@ -74,7 +74,7 @@
      </layout>
     </widget>
    </widget>
-   <widget class="QGroupBox" name="groupBox_4">
+   <widget class="QGroupBox" name="groupBox_LimiterCalculate">
     <property name="geometry">
      <rect>
       <x>410</x>
@@ -104,7 +104,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_25"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculateIFDB"/>
       </item>
       <item row="0" column="2">
        <widget class="QLabel" name="label_19">
@@ -114,7 +114,7 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QLineEdit" name="lineEdit_39"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculatea"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_18">
@@ -124,7 +124,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_26"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculateUFDB"/>
       </item>
       <item row="1" column="2">
        <widget class="QLabel" name="label_20">
@@ -134,7 +134,7 @@
        </widget>
       </item>
       <item row="1" column="3">
-       <widget class="QLineEdit" name="lineEdit_38"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculateb"/>
       </item>
       <item row="2" column="0">
        <widget class="QLabel" name="label_29">
@@ -144,7 +144,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEdit_29"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculateKFD"/>
       </item>
       <item row="2" column="2">
        <widget class="QLabel" name="label_21">
@@ -154,7 +154,7 @@
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="QLineEdit" name="lineEdit_36"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculaten"/>
       </item>
       <item row="3" column="0">
        <widget class="QLabel" name="label_30">
@@ -164,7 +164,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit_27"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculateUmax"/>
       </item>
       <item row="3" column="2">
        <widget class="QLabel" name="label_28">
@@ -174,7 +174,7 @@
        </widget>
       </item>
       <item row="3" column="3">
-       <widget class="QLineEdit" name="lineEdit_35"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculateSG10"/>
       </item>
       <item row="4" column="0">
        <widget class="QLabel" name="label_27">
@@ -184,7 +184,7 @@
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEdit_28"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculateUmin"/>
       </item>
       <item row="4" column="2">
        <widget class="QLabel" name="label_31">
@@ -194,7 +194,7 @@
        </widget>
       </item>
       <item row="4" column="3">
-       <widget class="QLineEdit" name="lineEdit_37"/>
+       <widget class="QLineEdit" name="lineEdit_LimiterCalculateSG12"/>
       </item>
      </layout>
     </widget>
@@ -208,9 +208,9 @@
       <height>401</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout"/>
+    <layout class="QVBoxLayout" name="verticalLayout_mpl"/>
    </widget>
-   <widget class="QGroupBox" name="groupBox">
+   <widget class="QGroupBox" name="groupBox_ExciterTransferCalculate">
     <property name="geometry">
      <rect>
       <x>200</x>
@@ -277,26 +277,26 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QLineEdit" name="lineEdit_2"/>
+         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateSTN"/>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_3"/>
+         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateUk"/>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_4"/>
+         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateULN"/>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_5"/>
+         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateXcReal"/>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_6"/>
+         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateXcpu"/>
         </item>
        </layout>
       </item>
      </layout>
     </widget>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="tableWidget_RawData">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -429,7 +429,7 @@
      </property>
     </item>
    </widget>
-   <widget class="QGroupBox" name="groupBox_3">
+   <widget class="QGroupBox" name="groupBox_ControlAngleCalculate">
     <property name="geometry">
      <rect>
       <x>230</x>
@@ -531,7 +531,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="pushButton_4">
+         <widget class="QPushButton" name="pushButton_ControlAngleCalculate">
           <property name="text">
            <string>角度范围计算</string>
           </property>
@@ -542,58 +542,58 @@
       <item>
        <layout class="QGridLayout" name="gridLayout">
         <item row="3" column="1">
-         <widget class="QLineEdit" name="lineEdit_20"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointAngle"/>
         </item>
         <item row="3" column="3">
-         <widget class="QLineEdit" name="lineEdit_22"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointAngle"/>
         </item>
         <item row="3" column="0">
-         <widget class="QLineEdit" name="lineEdit_19"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointAngle"/>
         </item>
         <item row="3" column="2">
-         <widget class="QLineEdit" name="lineEdit_21"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointAngle"/>
         </item>
         <item row="1" column="2">
-         <widget class="QLineEdit" name="lineEdit_14"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointUfd_3"/>
         </item>
         <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_12"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointIfd_2"/>
         </item>
         <item row="1" column="3">
-         <widget class="QLineEdit" name="lineEdit_17"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointUfd_4"/>
         </item>
         <item row="0" column="3">
-         <widget class="QLineEdit" name="lineEdit_16"/>
+         <widget class="QLineEdit" name="ControlAngleCalculateRisingFourthPointUt"/>
         </item>
         <item row="0" column="2">
-         <widget class="QLineEdit" name="lineEdit_13"/>
+         <widget class="QLineEdit" name="ControlAngleCalculateRisingThirdPointUt_2"/>
         </item>
         <item row="2" column="2">
-         <widget class="QLineEdit" name="lineEdit_15"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointIfd_3"/>
         </item>
         <item row="0" column="1">
-         <widget class="QLineEdit" name="lineEdit_10"/>
+         <widget class="QLineEdit" name="ControlAngleCalculateRisingSecondPointUt"/>
         </item>
         <item row="1" column="0">
-         <widget class="QLineEdit" name="lineEdit_8"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointUfd"/>
         </item>
         <item row="2" column="3">
-         <widget class="QLineEdit" name="lineEdit_18"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointIfd_4"/>
         </item>
         <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_11"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointUfd_2"/>
         </item>
         <item row="2" column="0">
-         <widget class="QLineEdit" name="lineEdit_9"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointIfd"/>
         </item>
         <item row="0" column="0">
-         <widget class="QLineEdit" name="lineEdit_7"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointUt"/>
         </item>
         <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEdit_23"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateAVGmax"/>
         </item>
         <item row="4" column="3">
-         <widget class="QLineEdit" name="lineEdit_24"/>
+         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateAVGmin"/>
         </item>
         <item row="4" column="0">
          <widget class="QLabel" name="label_14">
