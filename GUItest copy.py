@@ -20,6 +20,8 @@ class Main(QtWidgets.QMainWindow):
         ax1f1 = fig1.add_subplot(111)
         ax1f1.pcolormesh(np.random.rand(10,10))
         self.addmpl(fig1)
+
+        #控件与函数的连接  self+ui容器+控件+动作+connect（函数名称）
         self.ui.pushButton_NoLoadCalculateAutoCalculate.clicked.connect(
             self.NoLoadCalculateAutoCalculate)
 
