@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>QMainwindow</class>
- <widget class="QMainwindow" name="QMainwindow">
+ <class>Dialog</class>
+ <widget class="QMainWindow" name="QMainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QMainwindow</string>
+   <string>QMainWindow</string>
   </property>
   <widget class="QTableWidget" name="tableWidget">
    <property name="geometry">
@@ -614,14 +614,6 @@
    </widget>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QMainwindow</class>
-   <extends>QWidget</extends>
-   <header>qmainwindow.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>
