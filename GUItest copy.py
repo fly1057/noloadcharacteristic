@@ -32,7 +32,7 @@ class Main(QtWidgets.QMainWindow):
     def NoLoadCalculateReadCSV(self):
         try:
             print("hello world! ReadCSV")
-            openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
+            openfile_name = ["C:/Users/ll/Desktop/zaoshi1.csv", 1]
             # openfile_name = QtWidgets.QFileDialog.getOpenFileName(
             #  self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
@@ -50,7 +50,7 @@ class Main(QtWidgets.QMainWindow):
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
     def Reset(self):
-        fig1 = Figure()
+        fig1 = Figure(tight_layout=True)
         ax1f1 = fig1.add_subplot(111)
         ax1f1.pcolormesh(np.random.rand(10, 10))
         self.addmpl(fig1)
@@ -58,9 +58,10 @@ class Main(QtWidgets.QMainWindow):
     def ShowPlot(self):
         try:
             self.rmmpl()  #这句话必须要有，不然canvas会一直增加
-            fig1 = Figure()
+            fig1 = Figure(tight_layout=True)
+
             ax1f1 = fig1.add_subplot(111)
-            #ax1f1.pcolormesh(np.random.rand(10, 10))
+            
             # 所画曲线
             ax1f1.plot(self.IFD_saturation_sq,
                        self.UAB_saturation_sq,
@@ -84,8 +85,92 @@ class Main(QtWidgets.QMainWindow):
                        ':',
                        color='k')
             # legend
-            ax1f1.legend(['Saturation curve','Air-gap line'])
+            ax1f1.legend(['Saturation curve', 'Air-gap line'])
             #ax1f1.plot.legend(['空载特性曲线', '气隙线'])
+            # 标注IFDB、a、b、n、SG1.0、SG1.2
+            ax1f1.text(self.IFD_air_100_value,
+                       1.05,
+                       'IFDB1.0=' +
+                       str(round(float(self.IFD_air_100_value), 1)) + 'A',
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_120_value,
+                       1.25,
+                       'IFDB1.2=' +
+                       str(round(float(self.IFD_air_120_value), 1)) + 'A',
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_sat_100_value,
+                       0.5,
+                       'IFD01.0=' +
+                       str(round(float(self.IFD_sat_100_value), 1)) + 'A',
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_sat_120_value,
+                       0.5,
+                       'IFD01.2=' +
+                       str(round(float(self.IFD_sat_120_value), 1)) + 'A',
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_100_value / 5.0,
+                       1,
+                       'a=' + str(round(self.a, 3)),
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_100_value / 5,
+                       0.9,
+                       'b=' + str(round(self.b, 3)),
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_100_value / 5,
+                       0.8,
+                       'n=' + str(round(self.n, 3)),
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_100_value / 5,
+                       0.7,
+                       'SG1.0=' + str(round(self.SG100, 3)),
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_100_value / 5,
+                       0.6,
+                       'SG1.2=' + str(round(self.SG120, 3)),
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_100_value / 2,
+                       1,
+                       'IFDB=' + str(round(self.IFDB[0], 1)) + "A",
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_100_value / 2,
+                       0.9,
+                       'UFDB=' + str(round(self.UFDB[0], 1)) + "V",
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_100_value / 2,
+                       0.8,
+                       'KFD=' + str(round(self.KFD[0], 2)),
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            # 坐标图框架
+            # plt.title("")
+            # fig1.set_label("Ifd /A")
+            # ax1.xlabel("Ifd /A")
+            # ax1.ylabel("Ug /p.u.")
+            # ax1.xlim([0, self.IFD_saturation_sq.max()])
+            # ax1.ylim([0, 1.3])
             self.addmpl(fig1)
         except Exception as e:
             print(e)
