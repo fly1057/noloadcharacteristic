@@ -1,5 +1,6 @@
 from PyQt5.uic import loadUiType
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import Qt
 import numpy as np
 from os import path
 import pandas as pd
@@ -33,7 +34,7 @@ class Main(QtWidgets.QMainWindow):
     def NoLoadCalculateReadCSV(self):
         try:
             print("hello world! ReadCSV")
-            openfile_name = ["C:/Users/ll/Desktop/zaoshi1.csv", 1]
+            openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
             # openfile_name = QtWidgets.QFileDialog.getOpenFileName(
             #  self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
@@ -478,6 +479,7 @@ class Main(QtWidgets.QMainWindow):
 
 if __name__ == "__main__":
     import sys
+    QtWidgets.QApplication.setAttribute(Qt.AA_EnableHighDpiScaling) 
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = Main()
     MainWindow.show()
