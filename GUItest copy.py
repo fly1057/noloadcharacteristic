@@ -1,6 +1,8 @@
 from PyQt5.uic import loadUiType
 from PyQt5 import QtCore, QtGui, QtWidgets
 import numpy as np
+from os import path
+import pandas as pd
 from Ui_kongzaiQMainWindow import Ui_MainWindow
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt5agg import (
@@ -18,18 +20,25 @@ class Main(QtWidgets.QMainWindow):
         # 然后将canvas加入到之前在Qt designer中建立的layout中去，关键是要在设计时留一个空出来
         fig1 = Figure()
         ax1f1 = fig1.add_subplot(111)
-        ax1f1.pcolormesh(np.random.rand(10,10))
+        ax1f1.pcolormesh(np.random.rand(10, 10))
         self.addmpl(fig1)
 
         #控件与函数的连接  self+ui容器+控件+动作+connect（函数名称）
         self.ui.pushButton_NoLoadCalculateAutoCalculate.clicked.connect(
             self.NoLoadCalculateAutoCalculate)
+        self.ui.pushButton_NoLoadCalculateReadCSV.clicked.connect(
+            self.NoLoadCalculateReadCSV)
+
+    def NoLoadCalculateReadCSV(self):
+        path_str = u"C:/Users/ll/Desktop/zaoshi1.csv"
+        dir_filename, filetype = path.splitext(path_str)
+        df = pd.read_csv(path_str, encoding="gb2312")
 
     def addmpl(self, fig):
         self.canvas = FigureCanvas(fig)
         self.ui.verticalLayout_mpl.addWidget(self.canvas)
         self.canvas.draw()
-        self.toolbar = NavigationToolbar(self.canvas,self,coordinates=True)
+        self.toolbar = NavigationToolbar(self.canvas, self, coordinates=True)
         self.ui.verticalLayout_mpl.addWidget(self.toolbar)
 
     def rmmpl(self):
@@ -42,8 +51,8 @@ class Main(QtWidgets.QMainWindow):
         self.rmmpl()  #这句话必须要有，不然canvas会一直增加
         fig1 = Figure()
         ax1f1 = fig1.add_subplot(111)
-        ax1f1.pcolormesh(np.random.rand(10,10))
-        self.addmpl(fig1)  
+        ax1f1.pcolormesh(np.random.rand(10, 10))
+        self.addmpl(fig1)
 
 
 if __name__ == "__main__":
