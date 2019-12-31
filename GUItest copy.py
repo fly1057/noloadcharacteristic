@@ -60,7 +60,7 @@ class Main(QtWidgets.QMainWindow):
             ax1f1.pcolormesh(np.random.rand(10, 10))
             self.addmpl(fig1)
             self.ExciterTransferCalculateSTN = float(self.ui.lineEdit_ExciterTransferCalculateSTN.text())
-            print(self.ExciterTransferCalculateSTN)
+
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
