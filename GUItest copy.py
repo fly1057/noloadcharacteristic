@@ -25,6 +25,7 @@ class Main(QtWidgets.QMainWindow):
             self.NoLoadCalculateAutoCalculate)
         self.ui.pushButton_NoLoadCalculateReadCSV.clicked.connect(
             self.NoLoadCalculateReadCSV)
+        self.ui.pushButton_Reset.clicked.connect(self.Reset)
 
         self.Reset()
         self.ShowResultsText()
@@ -50,10 +51,24 @@ class Main(QtWidgets.QMainWindow):
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
     def Reset(self):
-        fig1 = Figure(tight_layout=True)
-        ax1f1 = fig1.add_subplot(111)
-        ax1f1.pcolormesh(np.random.rand(10, 10))
-        self.addmpl(fig1)
+        try:
+            #这里使用了一个小技巧，即先删除一下然后再增加一个图，
+            #如果报异常那么就转到异常处理代码，不删仅增
+            self.rmmpl()
+            fig1 = Figure(tight_layout=True)
+            ax1f1 = fig1.add_subplot(111)
+            ax1f1.pcolormesh(np.random.rand(10, 10))
+            self.addmpl(fig1)
+            self.ExciterTransferCalculateSTN = float(self.ui.lineEdit_ExciterTransferCalculateSTN.text())
+            print(self.ExciterTransferCalculateSTN)
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+            fig1 = Figure(tight_layout=True)
+            ax1f1 = fig1.add_subplot(111)
+            ax1f1.pcolormesh(np.random.rand(10, 10))
+            self.addmpl(fig1)
 
     def ShowPlot(self):
         try:
@@ -199,6 +214,28 @@ class Main(QtWidgets.QMainWindow):
                         QtWidgets.QTableWidgetItem(str(
                             self.df.iloc[i, j])))  # 这里必须采用str强制转换
             print("end UpdateTableWidgetFromDataFrame")
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+
+    def UpdateSelfFromPanel(self):
+        try:
+            print("begin UpdateSelfFromPanel")
+
+
+            print("end UpdateSelfFromPanel")
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+
+    def UpdatePanelFromSelf(self):
+        try:
+            print("begin UpdatePanelFromSelf")
+            self.ui.lineEdit_ExciterTransferCalculateXcReal = self.XcReal
+
+            print("end UpdatePanelFromSelf")
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
@@ -404,6 +441,7 @@ class Main(QtWidgets.QMainWindow):
             self.ULN = 450  # V
             self.STN = 10**6  # W
             self.Uk = 0.06
+            self.XcReal = self.ULN**2 / self.STN * self.Uk
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
                 if i == 0:
@@ -418,16 +456,19 @@ class Main(QtWidgets.QMainWindow):
                     self.KFD.append(
                         1.35 * self.ULN * self.UAB_saturation_sq[i] /
                         ((self.UFD_saturation_sq[i] + self.IFD_saturation_sq[i]
-                          * self.ULN**2 / self.STN * self.Uk) /
+                          *self.XcReal) /
                          (1 + self.SG[i])))
 
             print("IFDB = ", self.IFDB)
             print("UFDB = ", self.UFDB)
             print("KFD = ", self.KFD)
+
+            self.Xcpu = self.XcReal/(self.UFDB[0]/self.IFDB[0])
             ###############################################################################
 
             self.ShowPlot()
             self.ShowResultsText()
+            self.UpdatePanelFromSelf()
 
         except Exception as e:
             print(e)

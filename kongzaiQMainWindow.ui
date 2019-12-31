@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>141</width>
-      <height>151</height>
+      <height>171</height>
      </rect>
     </property>
     <property name="title">
@@ -32,7 +32,7 @@
        <x>11</x>
        <y>22</y>
        <width>121</width>
-       <height>130</height>
+       <height>140</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -46,7 +46,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_NoLoadCalculateLinearScope"/>
+         <widget class="QLineEdit" name="lineEdit_NoLoadCalculateLinearScope">
+          <property name="text">
+           <string>0.4</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -68,6 +72,13 @@
        <widget class="QPushButton" name="pushButton_NoLoadCalculateSaveCSV">
         <property name="text">
          <string>保存CSV</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_Reset">
+        <property name="text">
+         <string>复位</string>
         </property>
        </widget>
       </item>
@@ -240,7 +251,7 @@
         <item>
          <widget class="QLabel" name="label_2">
           <property name="text">
-           <string>STN（W）</string>
+           <string>STN（kW）</string>
           </property>
          </widget>
         </item>
@@ -277,13 +288,25 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateSTN"/>
+         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateSTN">
+          <property name="text">
+           <string>1000</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateUk"/>
+         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateUk">
+          <property name="text">
+           <string>0.06</string>
+          </property>
+         </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateULN"/>
+         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateULN">
+          <property name="text">
+           <string>450</string>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateXcReal"/>
