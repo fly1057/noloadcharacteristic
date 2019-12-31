@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ExcitationSystemModelingCalculator</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGroupBox" name="groupBox_NoLoadCalculate">
@@ -46,7 +46,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_NoLoadCalculateLinearScope">
+         <widget class="QLineEdit" name="lineEdit_LinearScope">
           <property name="text">
            <string>0.4</string>
           </property>
@@ -118,7 +118,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculateIFDB">
+       <widget class="QLineEdit" name="lineEdit_IFDB">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -132,7 +132,7 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculatea">
+       <widget class="QLineEdit" name="lineEdit_a">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -146,7 +146,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculateUFDB">
+       <widget class="QLineEdit" name="lineEdit_UFDB">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -160,7 +160,7 @@
        </widget>
       </item>
       <item row="1" column="3">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculateb">
+       <widget class="QLineEdit" name="lineEdit_b">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -174,7 +174,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculateKFD">
+       <widget class="QLineEdit" name="lineEdit_KFD">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -188,7 +188,7 @@
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculaten">
+       <widget class="QLineEdit" name="lineEdit_n">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -202,7 +202,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculateUmax">
+       <widget class="QLineEdit" name="lineEdit_Umax">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -216,7 +216,7 @@
        </widget>
       </item>
       <item row="3" column="3">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculateSG100">
+       <widget class="QLineEdit" name="lineEdit_SG100">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -230,7 +230,7 @@
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculateUmin">
+       <widget class="QLineEdit" name="lineEdit_Umin">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -244,7 +244,7 @@
        </widget>
       </item>
       <item row="4" column="3">
-       <widget class="QLineEdit" name="lineEdit_LimiterCalculateSG120">
+       <widget class="QLineEdit" name="lineEdit_SG120">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -331,7 +331,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_3">
         <item>
-         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateSTN">
+         <widget class="QLineEdit" name="lineEdit_STN">
           <property name="text">
            <string>1000</string>
           </property>
@@ -341,7 +341,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateUk">
+         <widget class="QLineEdit" name="lineEdit_Uk">
           <property name="text">
            <string>0.06</string>
           </property>
@@ -351,7 +351,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateULN">
+         <widget class="QLineEdit" name="lineEdit_ULN">
           <property name="text">
            <string>450</string>
           </property>
@@ -361,7 +361,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateXcReal">
+         <widget class="QLineEdit" name="lineEdit_XcReal">
           <property name="maxLength">
            <number>7</number>
           </property>
@@ -371,7 +371,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_ExciterTransferCalculateXcpu">
+         <widget class="QLineEdit" name="lineEdit_Xcpu">
           <property name="maxLength">
            <number>7</number>
           </property>
@@ -449,17 +449,17 @@
     </row>
     <column>
      <property name="text">
-      <string>UAB(pu)</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>IFD (A)</string>
+      <string>UAB(%)</string>
      </property>
     </column>
     <column>
      <property name="text">
       <string>UFD (V)</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>IFD (A)</string>
      </property>
     </column>
    </widget>
@@ -570,7 +570,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointUt">
+       <widget class="QLineEdit" name="lineEdit_Rising1Ut">
         <property name="text">
          <string>0.69323</string>
         </property>
@@ -580,7 +580,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="ControlAngleCalculateRisingSecondPointUt">
+       <widget class="QLineEdit" name="lineEdit_Rising2Ut">
         <property name="text">
          <string>0.73180</string>
         </property>
@@ -590,7 +590,7 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QLineEdit" name="ControlAngleCalculateRisingThirdPointUt_2">
+       <widget class="QLineEdit" name="lineEdit_Falling1Ut">
         <property name="text">
          <string>0.74304</string>
         </property>
@@ -600,7 +600,7 @@
        </widget>
       </item>
       <item row="1" column="3">
-       <widget class="QLineEdit" name="ControlAngleCalculateRisingFourthPointUt">
+       <widget class="QLineEdit" name="lineEdit_Falling2Ut">
         <property name="text">
          <string>0.62</string>
         </property>
@@ -610,7 +610,7 @@
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointUfd">
+       <widget class="QLineEdit" name="lineEdit_Rising1Ufd">
         <property name="text">
          <string>403.9</string>
         </property>
@@ -620,7 +620,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointUfd_2">
+       <widget class="QLineEdit" name="lineEdit_Rising2Ufd">
         <property name="text">
          <string>426.7</string>
         </property>
@@ -630,9 +630,9 @@
        </widget>
       </item>
       <item row="2" column="2">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointUfd_3">
+       <widget class="QLineEdit" name="lineEdit_Falling1Ufd">
         <property name="text">
-         <string>334.4</string>
+         <string>-382.4</string>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -640,9 +640,9 @@
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointUfd_4">
+       <widget class="QLineEdit" name="lineEdit_Falling2Ufd">
         <property name="text">
-         <string>279</string>
+         <string>-318</string>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -650,7 +650,7 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointIfd">
+       <widget class="QLineEdit" name="lineEdit_Rising1Ifd">
         <property name="text">
          <string>324.7</string>
         </property>
@@ -660,7 +660,7 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointIfd_2">
+       <widget class="QLineEdit" name="lineEdit_Rising2Ifd">
         <property name="text">
          <string>350.9</string>
         </property>
@@ -670,9 +670,9 @@
        </widget>
       </item>
       <item row="3" column="2">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointIfd_3">
+       <widget class="QLineEdit" name="lineEdit_Falling1Ifd">
         <property name="text">
-         <string>-382.4</string>
+         <string>311.5</string>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -680,9 +680,9 @@
        </widget>
       </item>
       <item row="3" column="3">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointIfd_4">
+       <widget class="QLineEdit" name="lineEdit_Falling2Ifd">
         <property name="text">
-         <string>-318</string>
+         <string>242.2</string>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -690,56 +690,56 @@
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointAngle">
+       <widget class="QLineEdit" name="lineEdit_Rising1Angle">
         <property name="maxLength">
          <number>7</number>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointAngle">
+       <widget class="QLineEdit" name="lineEdit_Rising2Angle">
         <property name="maxLength">
          <number>7</number>
         </property>
        </widget>
       </item>
       <item row="4" column="2">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointAngle">
+       <widget class="QLineEdit" name="lineEdit_Falling1Angle">
         <property name="maxLength">
          <number>7</number>
         </property>
        </widget>
       </item>
       <item row="4" column="3">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointAngle">
+       <widget class="QLineEdit" name="lineEdit_Falling2Angle">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="lineEdit_AngleAVGmin">
         <property name="maxLength">
          <number>7</number>
         </property>
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="QLabel" name="label_14">
-        <property name="text">
-         <string>αAVGmax</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateAVGmax">
-        <property name="maxLength">
-         <number>7</number>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
        <widget class="QLabel" name="label_16">
         <property name="text">
          <string>αAVGmin</string>
         </property>
        </widget>
       </item>
+      <item row="5" column="2">
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>αAVGmax</string>
+        </property>
+       </widget>
+      </item>
       <item row="5" column="3">
-       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateAVGmin">
+       <widget class="QLineEdit" name="lineEdit_AngleAVGmax">
         <property name="maxLength">
          <number>7</number>
         </property>
