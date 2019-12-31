@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1347</width>
+    <width>1264</width>
     <height>726</height>
    </rect>
   </property>
@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>151</width>
+      <width>131</width>
       <height>191</height>
      </rect>
     </property>
@@ -31,7 +31,7 @@
       <rect>
        <x>11</x>
        <y>22</y>
-       <width>132</width>
+       <width>111</width>
        <height>165</height>
       </rect>
      </property>
@@ -91,9 +91,9 @@
    <widget class="QGroupBox" name="groupBox_LimiterCalculate">
     <property name="geometry">
      <rect>
-      <x>850</x>
-      <y>10</y>
-      <width>261</width>
+      <x>780</x>
+      <y>20</y>
+      <width>251</width>
       <height>171</height>
      </rect>
     </property>
@@ -105,7 +105,7 @@
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>251</width>
+       <width>231</width>
        <height>135</height>
       </rect>
      </property>
@@ -267,9 +267,9 @@
    <widget class="QGroupBox" name="groupBox_ExciterTransferCalculate">
     <property name="geometry">
      <rect>
-      <x>160</x>
+      <x>140</x>
       <y>10</y>
-      <width>211</width>
+      <width>191</width>
       <height>171</height>
      </rect>
     </property>
@@ -281,7 +281,7 @@
       <rect>
        <x>10</x>
        <y>26</y>
-       <width>201</width>
+       <width>171</width>
        <height>137</height>
       </rect>
      </property>
@@ -307,6 +307,11 @@
         </item>
         <item>
          <widget class="QLabel" name="label_4">
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+           </font>
+          </property>
           <property name="text">
            <string>阳极电压ULN（V）</string>
           </property>
@@ -385,7 +390,7 @@
    <widget class="QTableWidget" name="tableWidget_RawData">
     <property name="geometry">
      <rect>
-      <x>1120</x>
+      <x>1040</x>
       <y>20</y>
       <width>221</width>
       <height>611</height>
@@ -466,9 +471,9 @@
    <widget class="QGroupBox" name="groupBox_ControlAngleCalculate">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>330</x>
       <y>10</y>
-      <width>481</width>
+      <width>451</width>
       <height>181</height>
      </rect>
     </property>
@@ -489,7 +494,7 @@
       <rect>
        <x>12</x>
        <y>40</y>
-       <width>133</width>
+       <width>104</width>
        <height>141</height>
       </rect>
      </property>
@@ -534,7 +539,7 @@
     <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>150</x>
+       <x>120</x>
        <y>20</y>
        <width>323</width>
        <height>157</height>
@@ -751,9 +756,9 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>870</x>
+      <x>780</x>
       <y>190</y>
-      <width>191</width>
+      <width>251</width>
       <height>441</height>
      </rect>
     </property>
@@ -764,8 +769,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1347</width>
-     <height>31</height>
+     <width>1264</width>
+     <height>23</height>
     </rect>
    </property>
   </widget>
