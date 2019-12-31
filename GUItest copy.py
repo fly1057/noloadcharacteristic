@@ -27,7 +27,6 @@ class Main(QtWidgets.QMainWindow):
             self.NoLoadCalculateReadCSV)
 
         self.Reset()
-        self.ShowPlot()
         self.ShowResultsText()
 
     def NoLoadCalculateReadCSV(self):
@@ -57,11 +56,41 @@ class Main(QtWidgets.QMainWindow):
         self.addmpl(fig1)
 
     def ShowPlot(self):
-        self.rmmpl()  #这句话必须要有，不然canvas会一直增加
-        fig1 = Figure()
-        ax1f1 = fig1.add_subplot(111)
-        ax1f1.pcolormesh(np.random.rand(10, 10))
-        self.addmpl(fig1)
+        try:
+            self.rmmpl()  #这句话必须要有，不然canvas会一直增加
+            fig1 = Figure()
+            ax1f1 = fig1.add_subplot(111)
+            #ax1f1.pcolormesh(np.random.rand(10, 10))
+            # 所画曲线
+            ax1f1.plot(self.IFD_saturation_sq,
+                       self.UAB_saturation_sq,
+                       color='k',
+                       marker='*')
+            ax1f1.plot(self.IFD_air_sq, self.UAB_air_sq, color='k', marker='')
+            ax1f1.plot(self.IFD_air_100_vertical_sq,
+                       self.UAB_air_100_vertical_sq,
+                       ':',
+                       color='k')
+            ax1f1.plot(self.IFD_air_120_vertical_sq,
+                       self.UAB_air_120_vertical_sq,
+                       ':',
+                       color='k')
+            ax1f1.plot(self.IFD_sat_100_vertical_sq,
+                       self.UAB_sat_100_vertical_sq,
+                       ':',
+                       color='k')
+            ax1f1.plot(self.IFD_sat_120_vertical_sq,
+                       self.UAB_sat_120_vertical_sq,
+                       ':',
+                       color='k')
+            # legend
+            ax1f1.legend(['Saturation curve','Air-gap line'])
+            #ax1f1.plot.legend(['空载特性曲线', '气隙线'])
+            self.addmpl(fig1)
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
     def UpdateTableWidgetFromDataFrame(self):
         try:
@@ -119,8 +148,7 @@ class Main(QtWidgets.QMainWindow):
 
     def NoLoadCalculateAutoCalculate(self):
         try:
-            self.ShowPlot()
-            self.ShowResultsText()
+
             self.df = self.df.rename(columns={
                 u'UAB(p.u.)': u'UAB',
                 u'UFD(V)': u'UFD',
@@ -249,10 +277,10 @@ class Main(QtWidgets.QMainWindow):
                 self.b * 1.2**self.n) * self.IFD_air_100_value  # 1.2UN对应的励磁电流
 
             # 形成空载特性曲线上1.0及1.2倍UN的下垂线
-            self.UAB_sat_100_vertical_sq = np.linspace(0, 1.0,
-                                                            141)  # 注意点数要都一致
-            self.IFD_sat_100_vertical_sq = np.linspace(
-                self.IFD_sat_100_value, self.IFD_sat_100_value, 141)
+            self.UAB_sat_100_vertical_sq = np.linspace(0, 1.0, 141)  # 注意点数要都一致
+            self.IFD_sat_100_vertical_sq = np.linspace(self.IFD_sat_100_value,
+                                                       self.IFD_sat_100_value,
+                                                       141)
             self.UAB_sat_120_vertical_sq = np.linspace(0, 1.2, 141)
             self.IFD_sat_120_vertical_sq = np.linspace(self.IFD_sat_120_value,
                                                        self.IFD_sat_120_value,
@@ -306,6 +334,9 @@ class Main(QtWidgets.QMainWindow):
             print("UFDB = ", self.UFDB)
             print("KFD = ", self.KFD)
             ###############################################################################
+
+            self.ShowPlot()
+            self.ShowResultsText()
 
         except Exception as e:
             print(e)
