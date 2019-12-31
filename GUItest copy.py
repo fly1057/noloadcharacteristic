@@ -1,3 +1,4 @@
+# coding=UTF-8
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt
 import numpy as np
@@ -33,7 +34,7 @@ class Main(QtWidgets.QMainWindow):
     def NoLoadCalculateReadCSV(self):
         try:
             print("hello world! ReadCSV")
-            openfile_name = ["C:/Users/ll/Desktop/zaoshi1.csv", 1]
+            openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
             # openfile_name = QtWidgets.QFileDialog.getOpenFileName(
             #  self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
@@ -222,8 +223,8 @@ class Main(QtWidgets.QMainWindow):
     def UpdateSelfFromPanel(self):
         try:
             print("begin UpdateSelfFromPanel")
-
-
+            self.ExciterTransferCalculateSTN = float(self.ui.lineEdit_ExciterTransferCalculateSTN.text)
+            print(self.ExciterTransferCalculateSTN)
             print("end UpdateSelfFromPanel")
         except Exception as e:
             print(e)
@@ -234,6 +235,17 @@ class Main(QtWidgets.QMainWindow):
         try:
             print("begin UpdatePanelFromSelf")
             self.ui.lineEdit_ExciterTransferCalculateXcReal.setText(str(self.XcReal))
+            self.ui.lineEdit_ExciterTransferCalculateXcpu.setText(str(self.Xcpu))
+            self.ui.lineEdit_LimiterCalculateIFDB.setText(str(self.IFDB[0]))
+            self.ui.lineEdit_LimiterCalculateUFDB.setText(str(self.UFDB[0]))
+            self.ui.lineEdit_LimiterCalculateKFD.setText(str(self.KFD[0]))
+            # self.ui.lineEdit_LimiterCalculateUmax.setText(str(self.Umax))
+            # self.ui.lineEdit_LimiterCalculateUmin.setText(str(self.Umin))
+            self.ui.lineEdit_LimiterCalculatea.setText(str(self.a))
+            self.ui.lineEdit_LimiterCalculateb.setText(str(self.b))
+            self.ui.lineEdit_LimiterCalculaten.setText(str(self.n))
+            self.ui.lineEdit_LimiterCalculateSG100.setText(str(self.SG100))
+            self.ui.lineEdit_LimiterCalculateSG120.setText(str(self.SG120))
 
             print("end UpdatePanelFromSelf")
         except Exception as e:
@@ -463,12 +475,14 @@ class Main(QtWidgets.QMainWindow):
             print("UFDB = ", self.UFDB)
             print("KFD = ", self.KFD)
 
-            self.Xcpu = self.XcReal/(self.UFDB[0]/self.IFDB[0])
+            self.Xcpu = self.XcReal / (self.UFDB[0] / self.IFDB[0])
+            self.ControlAngleCalculateRisingFirstPointAngle = 1
             ###############################################################################
 
             self.ShowPlot()
             self.ShowResultsText()
             self.UpdatePanelFromSelf()
+            self.UpdateSelfFromPanel()
 
         except Exception as e:
             print(e)
