@@ -59,9 +59,12 @@ class Main(QtWidgets.QMainWindow):
         try:
             self.rmmpl()  #这句话必须要有，不然canvas会一直增加
             fig1 = Figure(tight_layout=True)
-
+            #由于未采用pyplot而采用的figure，那么实际上ax1f1是一个包含axes的汇总的集合
+            #这个可以在debug窗口看出来，那么可以ax1f1.axes来使用axes的所有属性，如果有
+            #些出入的话，比如plt.axes.xlabel可以用ax1f1.axes.set_xlabel来实现，总之可以在
+            #debug窗口确认这个ax1f1是怎样的class，然后猜大概的属性
             ax1f1 = fig1.add_subplot(111)
-            
+
             # 所画曲线
             ax1f1.plot(self.IFD_saturation_sq,
                        self.UAB_saturation_sq,
@@ -164,13 +167,16 @@ class Main(QtWidgets.QMainWindow):
                        horizontalalignment='center',
                        verticalalignment='center')
 
+            # 设定图像大小，像素，去除边框
+            ax1f1.axes.spines['top'].set_visible(False)  # 去掉上边框
+            ax1f1.axes.spines['right'].set_visible(False)  # 去掉右边框
+
             # 坐标图框架
-            # plt.title("")
-            # fig1.set_label("Ifd /A")
-            # ax1.xlabel("Ifd /A")
-            # ax1.ylabel("Ug /p.u.")
-            # ax1.xlim([0, self.IFD_saturation_sq.max()])
-            # ax1.ylim([0, 1.3])
+            ax1f1.axes.set_xlabel("Ifd /A")
+            ax1f1.axes.set_ylabel("Ug /p.u.")
+            ax1f1.axes.set_xlim([0, self.IFD_saturation_sq.max()])
+            ax1f1.axes.set_ylim([0, 1.3])
+
             self.addmpl(fig1)
         except Exception as e:
             print(e)
