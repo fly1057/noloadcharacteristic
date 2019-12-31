@@ -33,7 +33,7 @@ class Main(QtWidgets.QMainWindow):
     def NoLoadCalculateReadCSV(self):
         try:
             print("hello world! ReadCSV")
-            openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
+            openfile_name = ["C:/Users/ll/Desktop/zaoshi1.csv", 1]
             # openfile_name = QtWidgets.QFileDialog.getOpenFileName(
             #  self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
@@ -233,7 +233,7 @@ class Main(QtWidgets.QMainWindow):
     def UpdatePanelFromSelf(self):
         try:
             print("begin UpdatePanelFromSelf")
-            self.ui.lineEdit_ExciterTransferCalculateXcReal = self.XcReal
+            self.ui.lineEdit_ExciterTransferCalculateXcReal.setText(str(self.XcReal))
 
             print("end UpdatePanelFromSelf")
         except Exception as e:
