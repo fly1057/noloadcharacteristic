@@ -34,7 +34,7 @@ class Main(QtWidgets.QMainWindow):
             print("hello world! ReadCSV")
             openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
             # openfile_name = QtWidgets.QFileDialog.getOpenFileName(
-            #     self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
+            #  self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
             # openfile_name是元组，第一个元素是路径
             if openfile_name[0] == '':
