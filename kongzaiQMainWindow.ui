@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1097</width>
-    <height>627</height>
+    <width>1213</width>
+    <height>683</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>181</width>
+      <width>191</width>
       <height>151</height>
      </rect>
     </property>
@@ -213,7 +213,7 @@
    <widget class="QGroupBox" name="groupBox_ExciterTransferCalculate">
     <property name="geometry">
      <rect>
-      <x>170</x>
+      <x>220</x>
       <y>10</y>
       <width>201</width>
       <height>161</height>
@@ -299,9 +299,9 @@
    <widget class="QTableWidget" name="tableWidget_RawData">
     <property name="geometry">
      <rect>
-      <x>860</x>
+      <x>950</x>
       <y>10</y>
-      <width>201</width>
+      <width>221</width>
       <height>611</height>
      </rect>
     </property>
@@ -317,8 +317,23 @@
       <height>200</height>
      </size>
     </property>
+    <property name="font">
+     <font>
+      <family>Calibri</family>
+      <pointsize>9</pointsize>
+     </font>
+    </property>
     <property name="styleSheet">
      <string notr="true"/>
+    </property>
+    <property name="verticalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="autoScroll">
+     <bool>false</bool>
     </property>
     <property name="sortingEnabled">
      <bool>true</bool>
@@ -327,13 +342,16 @@
      <number>1</number>
     </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
-     <number>62</number>
+     <number>67</number>
     </attribute>
     <attribute name="horizontalHeaderMinimumSectionSize">
      <number>20</number>
     </attribute>
+    <attribute name="verticalHeaderVisible">
+     <bool>true</bool>
+    </attribute>
     <attribute name="verticalHeaderDefaultSectionSize">
-     <number>18</number>
+     <number>22</number>
     </attribute>
     <attribute name="verticalHeaderMinimumSectionSize">
      <number>7</number>
@@ -345,7 +363,7 @@
     </row>
     <column>
      <property name="text">
-      <string>UAB(p.u.)</string>
+      <string>UAB(pu)</string>
      </property>
     </column>
     <column>
@@ -362,9 +380,9 @@
    <widget class="QGroupBox" name="groupBox_ControlAngleCalculate">
     <property name="geometry">
      <rect>
-      <x>430</x>
+      <x>420</x>
       <y>200</y>
-      <width>391</width>
+      <width>521</width>
       <height>181</height>
      </rect>
     </property>
@@ -380,166 +398,158 @@
     <property name="checkable">
      <bool>false</bool>
     </property>
-    <widget class="QWidget" name="layoutWidget_4">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>20</y>
-       <width>323</width>
-       <height>20</height>
+       <x>11</x>
+       <y>41</y>
+       <width>133</width>
+       <height>131</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>机端电压（p.u.）</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>励磁电压（V）</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>励磁电流（A）</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_15">
+        <property name="text">
+         <string>αmin/αmax（°）</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_ControlAngleCalculate">
+        <property name="text">
+         <string>角度范围计算</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>20</y>
+       <width>341</width>
+       <height>151</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="0" column="0">
        <widget class="QLabel" name="label_10">
         <property name="text">
          <string>上升第一点</string>
         </property>
        </widget>
       </item>
-      <item>
+      <item row="0" column="1">
        <widget class="QLabel" name="label_11">
         <property name="text">
          <string>上升第二点</string>
         </property>
        </widget>
       </item>
-      <item>
+      <item row="0" column="2">
        <widget class="QLabel" name="label_12">
         <property name="text">
          <string>下降第一点</string>
         </property>
        </widget>
       </item>
-      <item>
+      <item row="0" column="3">
        <widget class="QLabel" name="label_13">
         <property name="text">
          <string>下降第二点</string>
         </property>
        </widget>
       </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget_5">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>383</width>
-       <height>137</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
-         <widget class="QLabel" name="label_7">
-          <property name="text">
-           <string>机端电压（p.u.）</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_8">
-          <property name="text">
-           <string>励磁电压（V）</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_9">
-          <property name="text">
-           <string>励磁电流（A）</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_15">
-          <property name="text">
-           <string>αmin/αmax（°）</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pushButton_ControlAngleCalculate">
-          <property name="text">
-           <string>角度范围计算</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item row="1" column="0">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointUt"/>
       </item>
-      <item>
-       <layout class="QGridLayout" name="gridLayout">
-        <item row="3" column="1">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointAngle"/>
-        </item>
-        <item row="3" column="3">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointAngle"/>
-        </item>
-        <item row="3" column="0">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointAngle"/>
-        </item>
-        <item row="3" column="2">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointAngle"/>
-        </item>
-        <item row="1" column="2">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointUfd_3"/>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointIfd_2"/>
-        </item>
-        <item row="1" column="3">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointUfd_4"/>
-        </item>
-        <item row="0" column="3">
-         <widget class="QLineEdit" name="ControlAngleCalculateRisingFourthPointUt"/>
-        </item>
-        <item row="0" column="2">
-         <widget class="QLineEdit" name="ControlAngleCalculateRisingThirdPointUt_2"/>
-        </item>
-        <item row="2" column="2">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointIfd_3"/>
-        </item>
-        <item row="0" column="1">
-         <widget class="QLineEdit" name="ControlAngleCalculateRisingSecondPointUt"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointUfd"/>
-        </item>
-        <item row="2" column="3">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointIfd_4"/>
-        </item>
-        <item row="1" column="1">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointUfd_2"/>
-        </item>
-        <item row="2" column="0">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointIfd"/>
-        </item>
-        <item row="0" column="0">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointUt"/>
-        </item>
-        <item row="4" column="1">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateAVGmax"/>
-        </item>
-        <item row="4" column="3">
-         <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateAVGmin"/>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="label_14">
-          <property name="text">
-           <string>αAVGmax</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2">
-         <widget class="QLabel" name="label_16">
-          <property name="text">
-           <string>αAVGmin</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="ControlAngleCalculateRisingSecondPointUt"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="ControlAngleCalculateRisingThirdPointUt_2"/>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLineEdit" name="ControlAngleCalculateRisingFourthPointUt"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointUfd"/>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointUfd_2"/>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointUfd_3"/>
+      </item>
+      <item row="2" column="3">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointUfd_4"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointIfd"/>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointIfd_2"/>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointIfd_3"/>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointIfd_4"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFirstPointAngle"/>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingSecondPointAngle"/>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingThirdPointAngle"/>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateRisingFourthPointAngle"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_14">
+        <property name="text">
+         <string>αAVGmax</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateAVGmax"/>
+      </item>
+      <item row="5" column="2">
+       <widget class="QLabel" name="label_16">
+        <property name="text">
+         <string>αAVGmin</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3">
+       <widget class="QLineEdit" name="lineEdit_ControlAngleCalculateAVGmin"/>
       </item>
      </layout>
     </widget>
@@ -547,8 +557,8 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>420</x>
-      <y>400</y>
+      <x>440</x>
+      <y>390</y>
       <width>401</width>
       <height>131</height>
      </rect>
@@ -560,13 +570,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-<<<<<<< HEAD
-     <width>1101</width>
+     <width>1213</width>
      <height>31</height>
-=======
-     <width>1097</width>
-     <height>23</height>
->>>>>>> 89ba37e2bc333e133a755ab47837eb1549e9a569
     </rect>
    </property>
   </widget>
