@@ -33,9 +33,9 @@ class Main(QtWidgets.QMainWindow):
     def NoLoadCalculateReadCSV(self):
         try:
             print("hello world! ReadCSV")
-            openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
-            # openfile_name = QtWidgets.QFileDialog.getOpenFileName(
-            #  self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
+            #openfile_name = ["C:/Users/ll/Desktop/zaoshi1.csv", 1]
+            openfile_name = QtWidgets.QFileDialog.getOpenFileName(
+                self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
             # openfile_name是元组，第一个元素是路径
             if openfile_name[0] == '':
@@ -222,7 +222,7 @@ class Main(QtWidgets.QMainWindow):
         try:
             print("begin UpdateSelfFromPanel")
             self.LinearScope = float(self.ui.lineEdit_LinearScope.text())
-            self.STN = float(self.ui.lineEdit_STN.text())*1000
+            self.STN = float(self.ui.lineEdit_STN.text()) * 1000
             self.Uk = float(self.ui.lineEdit_Uk.text())
             self.ULN = float(self.ui.lineEdit_ULN.text())
 
@@ -256,7 +256,7 @@ class Main(QtWidgets.QMainWindow):
             self.ui.lineEdit_Falling1Angle.setText(str(self.Falling1Angle))
             self.ui.lineEdit_Falling2Angle.setText(str(self.Falling2Angle))
             self.ui.lineEdit_AngleAVGmax.setText(str(self.AngleAVGmax))
-            self.ui.lineEdit_AngleAVGmin.setText(str(self.AngleAVGmin))           
+            self.ui.lineEdit_AngleAVGmin.setText(str(self.AngleAVGmin))
             self.ui.lineEdit_IFDB.setText(str(self.IFDB))
             self.ui.lineEdit_UFDB.setText(str(self.UFDB))
             self.ui.lineEdit_KFD.setText(str(self.KFD))
@@ -489,7 +489,7 @@ class Main(QtWidgets.QMainWindow):
             self.IFDBseq = []
             self.UFDBseq = []
             self.KFDseq = []
-            self.XcReal = self.ULN**2 /self.STN * self.Uk
+            self.XcReal = self.ULN**2 / self.STN * self.Uk
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
                 if i == 0:
@@ -503,8 +503,8 @@ class Main(QtWidgets.QMainWindow):
                          (1 + self.SG[i])) / self.UAB_saturation_sq[i])
                     self.KFDseq.append(
                         1.35 * self.ULN * self.UAB_saturation_sq[i] /
-                        ((self.UFD_saturation_sq[i] + self.IFD_saturation_sq[i]
-                          * self.XcReal) /
+                        ((self.UFD_saturation_sq[i] +
+                          self.IFD_saturation_sq[i] * self.XcReal) /
                          (1 + self.SG[i])))
 
             print("IFDB = ", self.IFDBseq)
@@ -515,12 +515,20 @@ class Main(QtWidgets.QMainWindow):
             self.IFDB = self.IFDBseq[0]
             self.KFD = self.KFDseq[0]
 
-            self.Rising1Angle = 180/np.pi*np.arccos((self.Rising1Ufd + self.Rising1Ifd * self.XcReal)/(1.35*self.ULN*self.Rising1Ut ))
-            self.Rising2Angle = 180/np.pi*np.arccos((self.Rising2Ufd + self.Rising2Ifd * self.XcReal)/(1.35*self.ULN*self.Rising2Ut ))
+            self.Rising1Angle = 180 / np.pi * np.arccos(
+                (self.Rising1Ufd + self.Rising1Ifd * self.XcReal) /
+                (1.35 * self.ULN * self.Rising1Ut))
+            self.Rising2Angle = 180 / np.pi * np.arccos(
+                (self.Rising2Ufd + self.Rising2Ifd * self.XcReal) /
+                (1.35 * self.ULN * self.Rising2Ut))
 
-            self.Falling1Angle = 180/np.pi*np.arccos((self.Falling1Ufd + self.Falling1Ifd * self.XcReal)/(1.35*self.ULN*self.Falling1Ut ))
-            self.Falling2Angle = 180/np.pi*np.arccos((self.Falling2Ufd + self.Falling2Ifd * self.XcReal)/(1.35*self.ULN*self.Falling2Ut ))
-            
+            self.Falling1Angle = 180 / np.pi * np.arccos(
+                (self.Falling1Ufd + self.Falling1Ifd * self.XcReal) /
+                (1.35 * self.ULN * self.Falling1Ut))
+            self.Falling2Angle = 180 / np.pi * np.arccos(
+                (self.Falling2Ufd + self.Falling2Ifd * self.XcReal) /
+                (1.35 * self.ULN * self.Falling2Ut))
+
             self.AngleAVGmin = np.average(
                 [self.Rising1Angle, self.Rising2Angle])
             self.AngleAVGmax = np.average(
