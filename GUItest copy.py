@@ -27,7 +27,6 @@ class Main(QtWidgets.QMainWindow):
             self.NoLoadCalculateReadCSV)
         self.ui.pushButton_Reset.clicked.connect(self.Reset)
         self.ui.pushButton_AngleScopeCalculate.clicked.connect(self.AngleScopeCalculate)
-        self.ui.pushButton_ExciterTranformerCalculate.clicked.connect(self.ExciterTranformerCalculate)
 
         self.Reset()
 
@@ -53,9 +52,10 @@ class Main(QtWidgets.QMainWindow):
 
     def Reset(self):
         try:
-            # 这里使用了一个小技巧，即先删除一下然后再增加一个图，
-            # 如果报异常那么就转到异常处理代码，不删仅增
-            self.rmmpl()
+            #如果函数A内部有异常机制，那么可以随意在别的函数B里面调用A，不会影响函数B的流程
+            #也就是说在self.rmmpl()内有异常机制，调用这个函数如果出现了错误也只会报异常
+            #还会在Reset里面继续走下去
+            self.rmmpl() 
             fig1 = Figure(tight_layout=True)
             ax1f1 = fig1.add_subplot(111)
             ax1f1.pcolormesh(np.random.rand(10, 10))
@@ -65,10 +65,6 @@ class Main(QtWidgets.QMainWindow):
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
-            fig1 = Figure(tight_layout=True)
-            ax1f1 = fig1.add_subplot(111)
-            ax1f1.pcolormesh(np.random.rand(10, 10))
-            self.addmpl(fig1)
 
     def ShowPlot(self):
         try:
@@ -314,7 +310,7 @@ class Main(QtWidgets.QMainWindow):
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
-    def rmmpl(self):
+    def rmmpl(self):#如果函数A内部有异常机制，那么可以随意在别的函数B里面调用A，不会影响函数B的流程
         try:
             self.ui.verticalLayout_mpl.removeWidget(self.canvas)
             self.canvas.close()
@@ -324,6 +320,7 @@ class Main(QtWidgets.QMainWindow):
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+            print("Exception caused by deleting figure Firstly! ")
 
     def NoLoadCalculateAutoCalculate(self):
         try:
@@ -486,7 +483,7 @@ class Main(QtWidgets.QMainWindow):
             self.UFDBseq = []
             self.KFDseq = []
 
-            self.ExciterTranformerCalculate()
+            self.XcReal = self.ULN ** 2 / self.STN * self.Uk
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
                 if i == 0:
@@ -555,17 +552,6 @@ class Main(QtWidgets.QMainWindow):
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
-    def ExciterTranformerCalculate(self):
-        try:
-            #根据panel更新self
-            self.UpdateSelfFromPanel()
-            self.XcReal = self.ULN ** 2 / self.STN * self.Uk
-            self.UpdatePanelFromSelf()
-            self.ShowResultsText()
-        except Exception as e:
-            print(e)
-            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
-            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 if __name__ == "__main__":
     import sys
     QtWidgets.QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
