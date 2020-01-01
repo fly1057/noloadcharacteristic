@@ -1,8 +1,7 @@
 # coding=UTF-8
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import  QtWidgets
 from PyQt5.QtCore import Qt
 import numpy as np
-from os import path
 import pandas as pd
 from Ui_kongzaiQMainWindow import Ui_MainWindow
 from matplotlib.figure import Figure
@@ -14,7 +13,7 @@ from scipy.optimize import least_squares, leastsq
 
 
 class Main(QtWidgets.QMainWindow):
-    def __init__(self):
+    def __init__(self):    
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -27,15 +26,22 @@ class Main(QtWidgets.QMainWindow):
         self.ui.pushButton_NoLoadCalculateReadCSV.clicked.connect(
             self.NoLoadCalculateReadCSV)
         self.ui.pushButton_Reset.clicked.connect(self.Reset)
+        self.ui.pushButton_AngleScopeCalculate.clicked.connect(self.AngleScopeCalculate)
 
         self.Reset()
 
     def NoLoadCalculateReadCSV(self):
         try:
             print("hello world! ReadCSV")
+<<<<<<< HEAD
             #openfile_name = ["C:/Users/ll/Desktop/zaoshi1.csv", 1]
             openfile_name = QtWidgets.QFileDialog.getOpenFileName(
                 self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
+=======
+            #openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
+            openfile_name = QtWidgets.QFileDialog.getOpenFileName(
+            self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
+>>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
 
             # openfile_name是元组，第一个元素是路径
             if openfile_name[0] == '':
@@ -52,9 +58,10 @@ class Main(QtWidgets.QMainWindow):
 
     def Reset(self):
         try:
-            # 这里使用了一个小技巧，即先删除一下然后再增加一个图，
-            # 如果报异常那么就转到异常处理代码，不删仅增
-            self.rmmpl()
+            #如果函数A内部有异常机制，那么可以随意在别的函数B里面调用A，不会影响函数B的流程
+            #也就是说在self.rmmpl()内有异常机制，调用这个函数如果出现了错误也只会报异常
+            #还会在Reset里面继续走下去
+            self.rmmpl() 
             fig1 = Figure(tight_layout=True)
             ax1f1 = fig1.add_subplot(111)
             ax1f1.pcolormesh(np.random.rand(10, 10))
@@ -64,10 +71,6 @@ class Main(QtWidgets.QMainWindow):
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
-            fig1 = Figure(tight_layout=True)
-            ax1f1 = fig1.add_subplot(111)
-            ax1f1.pcolormesh(np.random.rand(10, 10))
-            self.addmpl(fig1)
 
     def ShowPlot(self):
         try:
@@ -288,8 +291,8 @@ class Main(QtWidgets.QMainWindow):
                                         "Rising2Angle=" + str(round(self.Rising2Angle, 4)) + "\n" \
                                         "Falling1Angle=" + str(round(self.Falling1Angle, 4)) + "\n" \
                                         "Falling2Angle=" + str(round(self.Falling2Angle, 4)) + "\n" \
-                                        "αmin=" + str(round(self.AngleAVGmin, 4)) + "\n" \
-                                        "αmax=" + str(round(self.AngleAVGmax, 4)) + "\n" \
+                                        "αAVGmin=" + str(round(self.AngleAVGmin, 4)) + "\n" \
+                                        "αAVGmax=" + str(round(self.AngleAVGmax, 4)) + "\n" \
                                         "Umax=" + str(round(self.Umax, 4)) + "\n"\
                                         "Umin=" + str(round(self.Umin, 4)) + "\n"\
                                         )
@@ -313,7 +316,7 @@ class Main(QtWidgets.QMainWindow):
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
-    def rmmpl(self):
+    def rmmpl(self):#如果函数A内部有异常机制，那么可以随意在别的函数B里面调用A，不会影响函数B的流程
         try:
             self.ui.verticalLayout_mpl.removeWidget(self.canvas)
             self.canvas.close()
@@ -323,6 +326,7 @@ class Main(QtWidgets.QMainWindow):
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+            print("Exception caused by deleting figure Firstly! ")
 
     def NoLoadCalculateAutoCalculate(self):
         try:
@@ -345,16 +349,11 @@ class Main(QtWidgets.QMainWindow):
             # 取IFD和UAB前面0.4额定电压的段作为气隙线的拟合基本数据
             # 通过UAB[(UAB>0.35)&(UAB<0.45)].index.get_values()得到index的array
             # 由于head需要int型变量，那么array是不行的，取个巧，取这个array的最大
-            # 值的到index的int值
-            self.UAB_40_sq = self.UAB.head(
-                self.UAB[(self.UAB > 0.45)
-                         & (self.UAB < 0.6)].index.to_numpy().max())
-            self.IFD_40_sq = self.IFD.head(
-                self.UAB[(self.UAB > 0.45)
-                         & (self.UAB < 0.6)].index.to_numpy().max())
-            self.UFD_40_sq = self.UFD.head(
-                self.UAB[(self.UAB > 0.45)
-                         & (self.UAB < 0.6)].index.to_numpy().max())
+            # 值得到index的int值
+            tempindex = self.UAB[(self.UAB > self.LinearScope)& (self.UAB < 1.2*self.LinearScope)].index.to_numpy().max()
+            self.UAB_40_sq = self.UAB.head(tempindex)
+            self.IFD_40_sq = self.IFD.head(tempindex)
+            self.UFD_40_sq = self.UFD.head(tempindex)
 
             ###############################################################################
             # 气隙线残差函数
@@ -489,7 +488,12 @@ class Main(QtWidgets.QMainWindow):
             self.IFDBseq = []
             self.UFDBseq = []
             self.KFDseq = []
+<<<<<<< HEAD
             self.XcReal = self.ULN**2 / self.STN * self.Uk
+=======
+
+            self.XcReal = self.ULN ** 2 / self.STN * self.Uk
+>>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
                 if i == 0:
@@ -514,6 +518,25 @@ class Main(QtWidgets.QMainWindow):
             self.UFDB = self.UFDBseq[0]
             self.IFDB = self.IFDBseq[0]
             self.KFD = self.KFDseq[0]
+            self.Xcpu = self.XcReal / (self.UFDB / self.IFDB)
+
+            self.AngleScopeCalculate()
+
+            ###############################################################################
+
+            self.ShowPlot()
+            self.UpdatePanelFromSelf()
+            self.ShowResultsText()
+
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+
+    def AngleScopeCalculate(self):
+        try:
+            #根据panel更新self
+            self.UpdateSelfFromPanel()
 
             self.Rising1Angle = 180 / np.pi * np.arccos(
                 (self.Rising1Ufd + self.Rising1Ifd * self.XcReal) /
@@ -537,21 +560,15 @@ class Main(QtWidgets.QMainWindow):
             self.Umax = 1.35*self.ULN * \
                 np.cos(self.AngleAVGmin/180*np.pi) / self.UFDB
             self.Umin = 1.35*self.ULN * \
-                np.cos(self.AngleAVGmax/180*np.pi) / self.UFDB
+                np.cos(self.AngleAVGmax / 180 * np.pi) / self.UFDB
 
-            self.Xcpu = self.XcReal / (self.UFDB / self.IFDB)
-
-            ###############################################################################
-
-            self.ShowPlot()
+            #根据self更新panel和text
             self.UpdatePanelFromSelf()
             self.ShowResultsText()
-
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
-
 
 if __name__ == "__main__":
     import sys

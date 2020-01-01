@@ -6,8 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
+<<<<<<< HEAD
     <width>1264</width>
     <height>726</height>
+=======
+    <width>1311</width>
+    <height>854</height>
+>>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +36,11 @@
       <rect>
        <x>11</x>
        <y>22</y>
+<<<<<<< HEAD
        <width>111</width>
+=======
+       <width>131</width>
+>>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
        <height>165</height>
       </rect>
      </property>
@@ -48,7 +57,7 @@
         <item>
          <widget class="QLineEdit" name="lineEdit_LinearScope">
           <property name="text">
-           <string>0.4</string>
+           <string>0.45</string>
           </property>
           <property name="maxLength">
            <number>7</number>
@@ -60,7 +69,7 @@
       <item>
        <widget class="QPushButton" name="pushButton_NoLoadCalculateAutoCalculate">
         <property name="text">
-         <string>自动计算绘图</string>
+         <string>空载特性计算</string>
         </property>
        </widget>
       </item>
@@ -88,6 +97,7 @@
      </layout>
     </widget>
    </widget>
+<<<<<<< HEAD
    <widget class="QGroupBox" name="groupBox_LimiterCalculate">
     <property name="geometry">
      <rect>
@@ -253,13 +263,15 @@
      </layout>
     </widget>
    </widget>
+=======
+>>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>210</y>
-      <width>761</width>
-      <height>421</height>
+      <y>230</y>
+      <width>791</width>
+      <height>561</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_mpl"/>
@@ -269,7 +281,7 @@
      <rect>
       <x>140</x>
       <y>10</y>
-      <width>191</width>
+      <width>201</width>
       <height>171</height>
      </rect>
     </property>
@@ -281,7 +293,11 @@
       <rect>
        <x>10</x>
        <y>26</y>
+<<<<<<< HEAD
        <width>171</width>
+=======
+       <width>191</width>
+>>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
        <height>137</height>
       </rect>
      </property>
@@ -325,9 +341,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="label_6">
+         <widget class="QPushButton" name="pushButton_ExciterTranformerCalculate">
           <property name="text">
-           <string>Xc（p.u.）</string>
+           <string>参数计算</string>
           </property>
          </widget>
         </item>
@@ -376,9 +392,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_Xcpu">
-          <property name="maxLength">
-           <number>7</number>
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string/>
           </property>
          </widget>
         </item>
@@ -393,7 +409,7 @@
       <x>1040</x>
       <y>20</y>
       <width>221</width>
-      <height>611</height>
+      <height>771</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -471,10 +487,17 @@
    <widget class="QGroupBox" name="groupBox_ControlAngleCalculate">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>330</x>
       <y>10</y>
       <width>451</width>
       <height>181</height>
+=======
+      <x>600</x>
+      <y>10</y>
+      <width>481</width>
+      <height>211</height>
+>>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
      </rect>
     </property>
     <property name="acceptDrops">
@@ -528,7 +551,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_ControlAngleCalculate">
+       <widget class="QPushButton" name="pushButton_AngleScopeCalculate">
         <property name="text">
          <string>角度范围计算</string>
         </property>
@@ -542,7 +565,7 @@
        <x>120</x>
        <y>20</y>
        <width>323</width>
-       <height>157</height>
+       <height>181</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -750,18 +773,205 @@
         </property>
        </widget>
       </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="label_30">
+        <property name="text">
+         <string>Umax</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="lineEdit_Umax">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="2">
+       <widget class="QLabel" name="label_27">
+        <property name="text">
+         <string>Umin</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="3">
+       <widget class="QLineEdit" name="lineEdit_Umin">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </widget>
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
+<<<<<<< HEAD
       <x>780</x>
       <y>190</y>
+=======
+      <x>820</x>
+      <y>230</y>
+>>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
       <width>251</width>
-      <height>441</height>
+      <height>561</height>
      </rect>
     </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_LimiterCalculate">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>10</y>
+      <width>241</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>空载特性计算结果</string>
+    </property>
+    <widget class="QWidget" name="layoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>221</width>
+       <height>171</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_17">
+        <property name="text">
+         <string>IFDB</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_IFDB">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_19">
+        <property name="text">
+         <string>a</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLineEdit" name="lineEdit_a">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_18">
+        <property name="text">
+         <string>UFDB</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_UFDB">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_20">
+        <property name="text">
+         <string>b</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLineEdit" name="lineEdit_b">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_29">
+        <property name="text">
+         <string>KFD</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="lineEdit_KFD">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLabel" name="label_21">
+        <property name="text">
+         <string>n</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QLineEdit" name="lineEdit_n">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineEdit_SG120">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_31">
+        <property name="text">
+         <string>SG1.2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEdit_SG100">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_28">
+        <property name="text">
+         <string>SG1.0</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Xc(p.u.)</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="lineEdit_Xcpu">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
