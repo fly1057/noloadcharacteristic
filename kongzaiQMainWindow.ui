@@ -6,13 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-<<<<<<< HEAD
     <width>1264</width>
     <height>726</height>
-=======
-    <width>1311</width>
-    <height>854</height>
->>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,11 +31,7 @@
       <rect>
        <x>11</x>
        <y>22</y>
-<<<<<<< HEAD
        <width>111</width>
-=======
-       <width>131</width>
->>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
        <height>165</height>
       </rect>
      </property>
@@ -97,7 +88,6 @@
      </layout>
     </widget>
    </widget>
-<<<<<<< HEAD
    <widget class="QGroupBox" name="groupBox_LimiterCalculate">
     <property name="geometry">
      <rect>
@@ -263,8 +253,6 @@
      </layout>
     </widget>
    </widget>
-=======
->>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
@@ -293,11 +281,7 @@
       <rect>
        <x>10</x>
        <y>26</y>
-<<<<<<< HEAD
        <width>171</width>
-=======
-       <width>191</width>
->>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
        <height>137</height>
       </rect>
      </property>
@@ -487,17 +471,10 @@
    <widget class="QGroupBox" name="groupBox_ControlAngleCalculate">
     <property name="geometry">
      <rect>
-<<<<<<< HEAD
       <x>330</x>
       <y>10</y>
       <width>451</width>
       <height>181</height>
-=======
-      <x>600</x>
-      <y>10</y>
-      <width>481</width>
-      <height>211</height>
->>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
      </rect>
     </property>
     <property name="acceptDrops">
@@ -807,13 +784,8 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-<<<<<<< HEAD
       <x>780</x>
       <y>190</y>
-=======
-      <x>820</x>
-      <y>230</y>
->>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
       <width>251</width>
       <height>561</height>
      </rect>
