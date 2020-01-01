@@ -33,9 +33,9 @@ class Main(QtWidgets.QMainWindow):
     def NoLoadCalculateReadCSV(self):
         try:
             print("hello world! ReadCSV")
-            openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
-            # openfile_name = QtWidgets.QFileDialog.getOpenFileName(
-            #  self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
+            #openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
+            openfile_name = QtWidgets.QFileDialog.getOpenFileName(
+            self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
             # openfile_name是元组，第一个元素是路径
             if openfile_name[0] == '':
@@ -345,16 +345,11 @@ class Main(QtWidgets.QMainWindow):
             # 取IFD和UAB前面0.4额定电压的段作为气隙线的拟合基本数据
             # 通过UAB[(UAB>0.35)&(UAB<0.45)].index.get_values()得到index的array
             # 由于head需要int型变量，那么array是不行的，取个巧，取这个array的最大
-            # 值的到index的int值
-            self.UAB_40_sq = self.UAB.head(
-                self.UAB[(self.UAB > 0.45)
-                         & (self.UAB < 0.6)].index.to_numpy().max())
-            self.IFD_40_sq = self.IFD.head(
-                self.UAB[(self.UAB > 0.45)
-                         & (self.UAB < 0.6)].index.to_numpy().max())
-            self.UFD_40_sq = self.UFD.head(
-                self.UAB[(self.UAB > 0.45)
-                         & (self.UAB < 0.6)].index.to_numpy().max())
+            # 值得到index的int值
+            tempindex = self.UAB[(self.UAB > self.LinearScope)& (self.UAB < 1.2*self.LinearScope)].index.to_numpy().max()
+            self.UAB_40_sq = self.UAB.head(tempindex)
+            self.IFD_40_sq = self.IFD.head(tempindex)
+            self.UFD_40_sq = self.UFD.head(tempindex)
 
             ###############################################################################
             # 气隙线残差函数
