@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'd:\setup\github\noloadcharacteristic\kongzaiQMainWindow.ui'
+# Form implementation generated from reading ui file 'h:\L330backup\file\work_index\generalfile\github\noloadcharacteristic\kongzaiQMainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -46,7 +46,7 @@ class Ui_MainWindow(object):
         self.pushButton_Reset.setObjectName("pushButton_Reset")
         self.verticalLayout_4.addWidget(self.pushButton_Reset)
         self.verticalLayoutWidget = QtWidgets.QWidget(self.centralwidget)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 230, 791, 561))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(10, 230, 791, 481))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.verticalLayout_mpl = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout_mpl.setContentsMargins(0, 0, 0, 0)
@@ -353,7 +353,7 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addWidget(self.lineEdit_Xcpu, 5, 1, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1311, 31))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1311, 23))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
