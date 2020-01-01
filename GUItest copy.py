@@ -1,8 +1,7 @@
 # coding=UTF-8
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import  QtWidgets
 from PyQt5.QtCore import Qt
 import numpy as np
-from os import path
 import pandas as pd
 from Ui_kongzaiQMainWindow import Ui_MainWindow
 from matplotlib.figure import Figure
@@ -27,6 +26,8 @@ class Main(QtWidgets.QMainWindow):
         self.ui.pushButton_NoLoadCalculateReadCSV.clicked.connect(
             self.NoLoadCalculateReadCSV)
         self.ui.pushButton_Reset.clicked.connect(self.Reset)
+        self.ui.pushButton_AngleScopeCalculate.clicked.connect(self.AngleScopeCalculate)
+        self.ui.pushButton_ExciterTranformerCalculate.clicked.connect(self.ExciterTranformerCalculate)
 
         self.Reset()
 
@@ -288,8 +289,8 @@ class Main(QtWidgets.QMainWindow):
                                         "Rising2Angle=" + str(round(self.Rising2Angle, 4)) + "\n" \
                                         "Falling1Angle=" + str(round(self.Falling1Angle, 4)) + "\n" \
                                         "Falling2Angle=" + str(round(self.Falling2Angle, 4)) + "\n" \
-                                        "αmin=" + str(round(self.AngleAVGmin, 4)) + "\n" \
-                                        "αmax=" + str(round(self.AngleAVGmax, 4)) + "\n" \
+                                        "αAVGmin=" + str(round(self.AngleAVGmin, 4)) + "\n" \
+                                        "αAVGmax=" + str(round(self.AngleAVGmax, 4)) + "\n" \
                                         "Umax=" + str(round(self.Umax, 4)) + "\n"\
                                         "Umin=" + str(round(self.Umin, 4)) + "\n"\
                                         )
@@ -484,7 +485,8 @@ class Main(QtWidgets.QMainWindow):
             self.IFDBseq = []
             self.UFDBseq = []
             self.KFDseq = []
-            self.XcReal = self.ULN**2 /self.STN * self.Uk
+
+            self.ExciterTranformerCalculate()
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
                 if i == 0:
@@ -509,6 +511,25 @@ class Main(QtWidgets.QMainWindow):
             self.UFDB = self.UFDBseq[0]
             self.IFDB = self.IFDBseq[0]
             self.KFD = self.KFDseq[0]
+            self.Xcpu = self.XcReal / (self.UFDB / self.IFDB)
+
+            self.AngleScopeCalculate()
+
+            ###############################################################################
+
+            self.ShowPlot()
+            self.UpdatePanelFromSelf()
+            self.ShowResultsText()
+
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+
+    def AngleScopeCalculate(self):
+        try:
+            #根据panel更新self
+            self.UpdateSelfFromPanel()
 
             self.Rising1Angle = 180/np.pi*np.arccos((self.Rising1Ufd + self.Rising1Ifd * self.XcReal)/(1.35*self.ULN*self.Rising1Ut ))
             self.Rising2Angle = 180/np.pi*np.arccos((self.Rising2Ufd + self.Rising2Ifd * self.XcReal)/(1.35*self.ULN*self.Rising2Ut ))
@@ -524,22 +545,27 @@ class Main(QtWidgets.QMainWindow):
             self.Umax = 1.35*self.ULN * \
                 np.cos(self.AngleAVGmin/180*np.pi) / self.UFDB
             self.Umin = 1.35*self.ULN * \
-                np.cos(self.AngleAVGmax/180*np.pi) / self.UFDB
+                np.cos(self.AngleAVGmax / 180 * np.pi) / self.UFDB
 
-            self.Xcpu = self.XcReal / (self.UFDB / self.IFDB)
-
-            ###############################################################################
-
-            self.ShowPlot()
+            #根据self更新panel和text
             self.UpdatePanelFromSelf()
             self.ShowResultsText()
-
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
-
+    def ExciterTranformerCalculate(self):
+        try:
+            #根据panel更新self
+            self.UpdateSelfFromPanel()
+            self.XcReal = self.ULN ** 2 / self.STN * self.Uk
+            self.UpdatePanelFromSelf()
+            self.ShowResultsText()
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 if __name__ == "__main__":
     import sys
     QtWidgets.QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
