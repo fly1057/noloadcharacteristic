@@ -11,7 +11,6 @@ from matplotlib.backends.backend_qt5agg import (
     NavigationToolbar2QT as NavigationToolbar)
 from scipy.optimize import least_squares, leastsq
 
-
 class Main(QtWidgets.QMainWindow):
     def __init__(self):    
         super().__init__()
@@ -33,15 +32,9 @@ class Main(QtWidgets.QMainWindow):
     def NoLoadCalculateReadCSV(self):
         try:
             print("hello world! ReadCSV")
-<<<<<<< HEAD
             #openfile_name = ["C:/Users/ll/Desktop/zaoshi1.csv", 1]
             openfile_name = QtWidgets.QFileDialog.getOpenFileName(
                 self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
-=======
-            #openfile_name = ["C:/Users/fly1057/Desktop/zaoshi1.csv", 1]
-            openfile_name = QtWidgets.QFileDialog.getOpenFileName(
-            self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
->>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
 
             # openfile_name是元组，第一个元素是路径
             if openfile_name[0] == '':
@@ -488,12 +481,7 @@ class Main(QtWidgets.QMainWindow):
             self.IFDBseq = []
             self.UFDBseq = []
             self.KFDseq = []
-<<<<<<< HEAD
             self.XcReal = self.ULN**2 / self.STN * self.Uk
-=======
-
-            self.XcReal = self.ULN ** 2 / self.STN * self.Uk
->>>>>>> afd3a94dfb2362034f3b9efafc14f921b295334d
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
                 if i == 0:
