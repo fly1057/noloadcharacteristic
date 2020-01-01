@@ -525,7 +525,7 @@ class Main(QtWidgets.QMainWindow):
 
     def AngleScopeCalculate(self):
         try:
-            #根据panel更新self
+            #根据panel更新self 
             self.UpdateSelfFromPanel()
 
             self.Rising1Angle = 180/np.pi*np.arccos((self.Rising1Ufd + self.Rising1Ifd * self.XcReal)/(1.35*self.ULN*self.Rising1Ut ))
