@@ -498,7 +498,7 @@ class Main(QtWidgets.QMainWindow):
                     self.KFDseq.append(
                         1.35 * self.ULN * self.UAB_saturation_sq[i] /
                         ((self.UFD_saturation_sq[i] + self.IFD_saturation_sq[i]
-                          * self.XcReal) /
+                          * 3.0/np.pi*self.XcReal) /
                          (1 + self.SG[i])))
 
             print("IFDB = ", self.IFDBseq)
