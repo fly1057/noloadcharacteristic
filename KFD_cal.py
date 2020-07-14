@@ -306,7 +306,7 @@ class Main(QtWidgets.QMainWindow):
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
-    def addmpl(self, fig):
+    def addmpl(self, fig): 
         try:
             self.canvas = FigureCanvas(fig)
             self.ui.verticalLayout_mpl.addWidget(self.canvas)
