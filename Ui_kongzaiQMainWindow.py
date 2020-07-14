@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'h:\L330backup\file\work_index\generalfile\github\noloadcharacteristic\kongzaiQMainWindow.ui'
+# Form implementation generated from reading ui file '/home/fly1057/桌面/noloadcharacteristic/kongzaiQMainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -144,7 +144,7 @@ class Ui_MainWindow(object):
         self.groupBox_ControlAngleCalculate.setCheckable(False)
         self.groupBox_ControlAngleCalculate.setObjectName("groupBox_ControlAngleCalculate")
         self.layoutWidget1 = QtWidgets.QWidget(self.groupBox_ControlAngleCalculate)
-        self.layoutWidget1.setGeometry(QtCore.QRect(10, 50, 101, 131))
+        self.layoutWidget1.setGeometry(QtCore.QRect(10, 50, 104, 131))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
