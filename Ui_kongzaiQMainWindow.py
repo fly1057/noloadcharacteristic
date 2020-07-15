@@ -105,6 +105,7 @@ class Ui_MainWindow(object):
         self.lineEdit_XcReal.setObjectName("lineEdit_XcReal")
         self.verticalLayout_3.addWidget(self.lineEdit_XcReal)
         self.lineEdit_XcRealEqual = QtWidgets.QLineEdit(self.layoutWidget_3)
+        self.lineEdit_XcRealEqual.setMaxLength(7)
         self.lineEdit_XcRealEqual.setObjectName("lineEdit_XcRealEqual")
         self.verticalLayout_3.addWidget(self.lineEdit_XcRealEqual)
         self.lineEdit_2 = QtWidgets.QLineEdit(self.layoutWidget_3)

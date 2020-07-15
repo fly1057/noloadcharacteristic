@@ -244,6 +244,7 @@ class Main(QtWidgets.QMainWindow):
         try:
             print("begin UpdatePanelFromSelf")
             self.ui.lineEdit_XcReal.setText(str(self.XcReal))
+            self.ui.lineEdit_XcRealEqual.setText(str(self.XcRealEqual))
             self.ui.lineEdit_Xcpu.setText(str(self.Xcpu))
             self.ui.lineEdit_Rising1Angle.setText(str(self.Rising1Angle))
             self.ui.lineEdit_Rising2Angle.setText(str(self.Rising2Angle))

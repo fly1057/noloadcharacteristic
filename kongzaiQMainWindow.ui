@@ -102,10 +102,10 @@
    <widget class="QGroupBox" name="groupBox_ExciterTransferCalculate">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>120</x>
       <y>10</y>
       <width>191</width>
-      <height>211</height>
+      <height>251</height>
      </rect>
     </property>
     <property name="title">
@@ -117,7 +117,7 @@
        <x>10</x>
        <y>20</y>
        <width>171</width>
-       <height>191</height>
+       <height>221</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -218,7 +218,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_XcRealEqual"/>
+         <widget class="QLineEdit" name="lineEdit_XcRealEqual">
+          <property name="maxLength">
+           <number>7</number>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLineEdit" name="lineEdit_2"/>
@@ -638,7 +642,7 @@
       <x>320</x>
       <y>10</y>
       <width>241</width>
-      <height>211</height>
+      <height>251</height>
      </rect>
     </property>
     <property name="title">
@@ -650,7 +654,7 @@
        <x>10</x>
        <y>20</y>
        <width>221</width>
-       <height>188</height>
+       <height>221</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
@@ -685,12 +689,12 @@
       <item row="1" column="0">
        <widget class="QLabel" name="label_18">
         <property name="text">
-         <string>UFDB</string>
+         <string>UFDB_BZ</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_UFDB">
+       <widget class="QLineEdit" name="lineEdit_UFDB_BZ">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -783,7 +787,7 @@
          </font>
         </property>
         <property name="text">
-         <string>KFD</string>
+         <string>KFD_BZ</string>
         </property>
         <property name="textFormat">
          <enum>Qt::RichText</enum>
@@ -791,7 +795,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEdit_KFD">
+       <widget class="QLineEdit" name="lineEdit_KFD_BZ">
         <property name="maxLength">
          <number>7</number>
         </property>
@@ -811,46 +815,80 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEdit_SG120">
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="lineEdit_XcEqualpu">
         <property name="maxLength">
          <number>7</number>
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label_31">
-        <property name="text">
-         <string>SG1.2</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
+      <item row="3" column="3">
        <widget class="QLineEdit" name="lineEdit_SG100">
         <property name="maxLength">
          <number>7</number>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
+      <item row="3" column="2">
        <widget class="QLabel" name="label_28">
         <property name="text">
          <string>SG1.0</string>
         </property>
        </widget>
       </item>
+      <item row="4" column="3">
+       <widget class="QLineEdit" name="lineEdit_SG120">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLabel" name="label_31">
+        <property name="text">
+         <string>SG1.2</string>
+        </property>
+       </widget>
+      </item>
       <item row="5" column="0">
        <widget class="QLabel" name="label_6">
         <property name="text">
-         <string>Xc(p.u.)</string>
+         <string>XcEqual(p.u.)</string>
         </property>
         <property name="textFormat">
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="lineEdit_Xcpu">
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_23">
+        <property name="text">
+         <string>UFDB_LL</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_24">
+        <property name="text">
+         <string>KFD_LL</string>
+        </property>
+        <property name="textFormat">
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="lineEdit_UFDB_LL">
+        <property name="maxLength">
+         <number>7</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="lineEdit_KFD_LL">
         <property name="maxLength">
          <number>7</number>
         </property>
