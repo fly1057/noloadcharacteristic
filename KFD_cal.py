@@ -20,13 +20,10 @@ class Main(QtWidgets.QMainWindow):
         # 在这里引入matplotlib的代码结构，首先建立figure，然后建立canvas，其中canvas是子类
         # 然后将canvas加入到之前在Qt designer中建立的layout中去，关键是要在设计时留一个空出来
         # 控件与函数的连接  self+ui容器+控件+动作+connect（函数名称）
-        self.ui.pushButton_NoLoadCalculateAutoCalculate.clicked.connect(
-            self.NoLoadCalculateAutoCalculate)
-        self.ui.pushButton_NoLoadCalculateReadCSV.clicked.connect(
-            self.NoLoadCalculateReadCSV)
+        self.ui.pushButton_NoLoadCalculateAutoCalculate.clicked.connect(self.NoLoadCalculateAutoCalculate)
+        self.ui.pushButton_NoLoadCalculateReadCSV.clicked.connect(self.NoLoadCalculateReadCSV)
         self.ui.pushButton_Reset.clicked.connect(self.Reset)
-        self.ui.pushButton_AngleScopeCalculate.clicked.connect(
-            self.AngleScopeCalculate)
+        self.ui.pushButton_AngleScopeCalculate.clicked.connect(self.AngleScopeCalculate)
         self.Reset()
 
     def NoLoadCalculateReadCSV(self):
