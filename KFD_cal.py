@@ -331,9 +331,16 @@ class Main(QtWidgets.QMainWindow):
 
     def NoLoadCalculateAutoCalculate(self):
         try:
-            #1 挑选线性段数据，即UAB和Ifd，比如UAB <0.4这一段，可以通过人机交互进行选择。然后通过索引挑选同样段的Ifd，Ufd
-            #2 对挑选段的数据进行线性拟合，得到直线UAB = k*IFD+h
-            
+            #1 pick up the linear data ，that is UAB and Ifd，such as UAB <0.4 ，could be choosen according HMI ,
+            # and then pick up the same scale of Ifd and Ufd according the index 
+            #2 linear fitting using the picked data ,then got the line UAB = k*IFD+h, UAB is in p.u.,IFD is in real
+            # then  UAB -h to get the new UAB 
+            # 舍弃h理由是，残差电压并非由励磁电流引起，因此需要舍弃，空载特性应该是以Ifd从0开始.
+            #3  calculate the basement of IFD . UAB(1.0)/k ,we got the IFDB , according the same method we got the UFDB
+            #4  calculate IFDB1.2 ,UFDB1.2 , according to the airline 
+            #5  nolinear fitting using all data to  get  a,b,n. This time we also using the data of UAB in step 2
+            #6  calculate the IFD01.0 and IFD01.2 according to the a,b,n
+            #7  calculate the KFD .   
             self.UpdateSelfFromPanel()
             #（1） 选取前部分数据进行计算
             self.df.columns = ['UAB', 'UFD', 'IFD']
@@ -358,7 +365,7 @@ class Main(QtWidgets.QMainWindow):
             self.UFD_40_sq = self.UFD.head(tempindex)
 
             ###############################################################################
-            # （2）非线性拟合
+            # （2）线性拟合
 
             def residuals_airgap_line_IFD(p):
                 k, h = p
@@ -370,6 +377,7 @@ class Main(QtWidgets.QMainWindow):
 
             self.res_IFD = leastsq(residuals_airgap_line_IFD, [1, 0])
             self.k_IFD, self.h_IFD = self.res_IFD[0]
+            self.UAB = self.UAB - self.h_IFD  # clear zero margin
             print("k_IFD = ", self.k_IFD, "h_IFD = ", self.h_IFD, "\n")
 
             self.res_UFD = leastsq(residuals_airgap_line_UFD, [1, 0])
@@ -413,7 +421,7 @@ class Main(QtWidgets.QMainWindow):
             # 进行计算前的初始化条件
             self.lb = np.array([0.01, 0.01])
             self.ub = np.array([10.0, 15.0])
-            self.x0 = [0.1, 7]
+            self.x0 = [0.1, 8]
             self.res2 = least_squares(residuals_saturation_curve,
                                       self.x0,
                                       ftol=0.001,
@@ -422,67 +430,53 @@ class Main(QtWidgets.QMainWindow):
             self.b, self.n = self.res2.x
             self.a = 1
 
-            # 得到空载特性曲线
+            # 得到空载饱和曲线
             self.UAB_saturation_sq = np.linspace(0, 1.22, 141)
             self.IFD_saturation_sq = (self.UAB_saturation_sq + self.b * self.UAB_saturation_sq**self.n) * self.IFD_air_100_value
             self.UFD_saturation_sq = (self.UAB_saturation_sq + self.b * self.UAB_saturation_sq**self.n) * self.UFD_air_100_value
 
-            # 计算空载特性曲线上的点
+            # 计算空载饱和曲线上的点
             self.IFD_sat_100_value = (1 + self.b * 1**self.n) * self.IFD_air_100_value  # 1.0UN对应的励磁电流
             self.IFD_sat_120_value = (1.2 +self.b * 1.2**self.n) * self.IFD_air_100_value  # 1.2UN对应的励磁电流
 
             # 形成空载特性曲线上1.0及1.2倍UN的下垂线
             self.UAB_sat_100_vertical_sq = np.linspace(0, 1.0, 141)  # 注意点数要都一致
-            self.IFD_sat_100_vertical_sq = np.linspace(self.IFD_sat_100_value,
-                                                       self.IFD_sat_100_value,
-                                                       141)
+            self.IFD_sat_100_vertical_sq = np.linspace(self.IFD_sat_100_value,self.IFD_sat_100_value,141)
             self.UAB_sat_120_vertical_sq = np.linspace(0, 1.2, 141)
-            self.IFD_sat_120_vertical_sq = np.linspace(self.IFD_sat_120_value,
-                                                       self.IFD_sat_120_value,
-                                                       141)
+            self.IFD_sat_120_vertical_sq = np.linspace(self.IFD_sat_120_value,self.IFD_sat_120_value,141)
 
-            self.SG100 = (self.IFD_sat_100_value -
-                          self.IFD_air_100_value) / self.IFD_air_100_value
-            self.SG120 = (self.IFD_sat_120_value -
-                          self.IFD_air_120_value) / self.IFD_air_120_value
+            self.SG100 = (self.IFD_sat_100_value - self.IFD_air_100_value) / self.IFD_air_100_value
+            self.SG120 = (self.IFD_sat_120_value - self.IFD_air_120_value) / self.IFD_air_120_value
 
-            # 按照公式再算一遍a b n，在这里使用IFD0的实际值，而在excel中使用的约等值，因此有误差
-            self.a = 1
-            self.b = self.SG100
-            self.n = 1 + np.log(self.SG120 / self.SG100) / np.log(1.2)
+            ## 按照公式再算一遍a b n，在这里使用IFD0的实际值，而在excel中使用的约等值，因此有误差
+            #self.a = 1
+            #self.b = self.SG100
+            #self.n = 1 + np.log(self.SG120 / self.SG100) / np.log(1.2)
 
             ###############################################################################
-            # 静态放大倍数计算
+            # KFD 静态放大倍数计算
             # 通过abn先计算SG
             def SG_function(UAB, a, b, n):
                 SG = b / a * UAB**(n - 1)
                 return SG
 
-            self.SG = SG_function(self.UAB_saturation_sq,
-                                  self.a, self.b, self.n)
+            self.SG = SG_function(self.UAB_saturation_sq,self.a, self.b, self.n)
             print("SG = ", self.SG)
 
+            #考察每个饱和点对应的气隙线上的点
             self.IFDBseq = []
             self.UFDBseq = []
             self.KFDseq = []
 
-            self.XcReal = self.ULN ** 2 / self.STN * self.Uk
+            self.XcReal = self.ULN**2/self.STN*self.Uk*3.0/np.pi  #有名值，包含了换相导致的系数3/pi
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
                 if i == 0:
                     pass
                 else:
-                    self.IFDBseq.append(
-                        (self.IFD_saturation_sq[i] /
-                         (1 + self.SG[i])) / self.UAB_saturation_sq[i])
-                    self.UFDBseq.append(
-                        (self.UFD_saturation_sq[i] /
-                         (1 + self.SG[i])) / self.UAB_saturation_sq[i])
-                    self.KFDseq.append(
-                        1.35 * self.ULN * self.UAB_saturation_sq[i] /
-                        ((self.UFD_saturation_sq[i] + self.IFD_saturation_sq[i]
-                          * 3.0/np.pi*self.XcReal) /
-                         (1 + self.SG[i]))
+                    self.IFDBseq.append((self.IFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
+                    self.UFDBseq.append((self.UFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
+                    self.KFDseq.append(1.35*self.ULN*self.UAB_saturation_sq[i]/((self.UFD_saturation_sq[i]+self.IFD_saturation_sq[i]*self.XcReal)/(1 + self.SG[i]))
                     )
 
             print("IFDB = ", self.IFDBseq)
