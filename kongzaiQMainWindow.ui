@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1251</width>
-    <height>854</height>
+    <width>1261</width>
+    <height>830</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -92,7 +92,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>230</y>
+      <y>290</y>
       <width>681</width>
       <height>481</height>
      </rect>
@@ -105,7 +105,7 @@
       <x>130</x>
       <y>10</y>
       <width>191</width>
-      <height>171</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="title">
@@ -117,7 +117,7 @@
        <x>10</x>
        <y>20</y>
        <width>171</width>
-       <height>141</height>
+       <height>191</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -156,6 +156,13 @@
          <widget class="QLabel" name="label_5">
           <property name="text">
            <string>Xc（有名）</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_22">
+          <property name="text">
+           <string>XcEqual（有名）</string>
           </property>
          </widget>
         </item>
@@ -211,7 +218,10 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit"/>
+         <widget class="QLineEdit" name="lineEdit_XcRealEqual"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="lineEdit_2"/>
         </item>
        </layout>
       </item>
@@ -305,7 +315,7 @@
       <x>570</x>
       <y>10</y>
       <width>441</width>
-      <height>211</height>
+      <height>251</height>
      </rect>
     </property>
     <property name="acceptDrops">
@@ -371,9 +381,9 @@
      <property name="geometry">
       <rect>
        <x>120</x>
-       <y>20</y>
+       <y>30</y>
        <width>311</width>
-       <height>181</height>
+       <height>212</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -616,7 +626,7 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>230</y>
+      <y>280</y>
       <width>311</width>
       <height>481</height>
      </rect>
@@ -855,7 +865,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1251</width>
+     <width>1261</width>
      <height>23</height>
     </rect>
    </property>
