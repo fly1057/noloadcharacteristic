@@ -336,8 +336,8 @@ class Main(QtWidgets.QMainWindow):
             #2 linear fitting using the picked data ,then got the line UAB = k*IFD+h, UAB is in p.u.,IFD is in real
             # then  UAB -h to get the new UAB 
             # 舍弃h理由是，残差电压并非由励磁电流引起，因此需要舍弃，空载特性应该是以Ifd从0开始.
-            #3  calculate the basement of IFD . UAB(1.0)/k ,we got the IFDB , according the same method we got the UFDB
-            #4  calculate IFDB1.2 ,UFDB1.2 , according to the airline 
+            #3  calculate the basevalue of IFD . By UAB(1.0)/k ,we got the IFDB , according the same method we got the UFDB
+            #4  calculate IFDB1.2 ,UFDB1.2 according to the airline 
             #5  nolinear fitting using all data to  get  a,b,n. This time we also using the data of UAB in step 2
             #6  calculate the IFD01.0 and IFD01.2 according to the a,b,n
             #7  calculate the KFD .   
