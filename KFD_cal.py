@@ -332,7 +332,7 @@ class Main(QtWidgets.QMainWindow):
     def NoLoadCalculateAutoCalculate(self):
         try:
             #1 pick up the linear data ，that is UAB and Ifd，such as UAB <0.4 ，could be choosen according HMI ,
-            # and then pick up the same scale of Ifd and Ufd according the index 
+            # and then pick up the same scale of Ifd and Ufd according to the index 
             #2 linear fitting using the picked data ,then got the line UAB = k*IFD+h, UAB is in p.u.,IFD is in real
             # then  UAB -h to get the new UAB 
             # 舍弃h理由是，残差电压并非由励磁电流引起，因此需要舍弃，空载特性应该是以Ifd从0开始.
