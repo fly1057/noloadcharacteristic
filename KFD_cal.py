@@ -331,7 +331,11 @@ class Main(QtWidgets.QMainWindow):
 
     def NoLoadCalculateAutoCalculate(self):
         try:
+            #1 挑选线性段数据，即UAB和Ifd，比如UAB <0.4这一段，可以通过人机交互进行选择。然后通过索引挑选同样段的Ifd，Ufd
+            #2 对挑选段的数据进行线性拟合，得到直线UAB = k*IFD+h
+            
             self.UpdateSelfFromPanel()
+            #（1） 选取前部分数据进行计算
             self.df.columns = ['UAB', 'UFD', 'IFD']
             # 截取上升段的数据，注意需要找到最大值index后加1
 
@@ -354,7 +358,7 @@ class Main(QtWidgets.QMainWindow):
             self.UFD_40_sq = self.UFD.head(tempindex)
 
             ###############################################################################
-            # 气隙线残差函数
+            # （2）非线性拟合
 
             def residuals_airgap_line_IFD(p):
                 k, h = p
@@ -372,21 +376,13 @@ class Main(QtWidgets.QMainWindow):
             self.k_UFD, self.h_UFD = self.res_UFD[0]
             print("k_UFD = ", self.k_UFD, "h_UFD = ", self.h_UFD, "\n")
 
-            # 对UAB减去残压，然后对IFD也同样进行筛选
-            # self.UAB_sq_IFD = self.UAB.head(
-            #    self.UAB[(self.UAB > self.h_IFD)].index.to_numpy().max())
-            # self.IFD_sq_IFD = self.IFD.head(
-            #    self.UAB[(self.UAB > self.h_IFD)].index.to_numpy().max())
-
-            # self.UAB_sq_UFD = self.UAB.head(
-            #    self.UAB[(self.UAB > self.h_UFD)].index.to_numpy().max())
-            # self.IFD_sq_UFD = self.IFD.head(
-            #    self.UAB[(self.UAB > self.h_UFD)].index.to_numpy().max())
-
-            self.h_IFD = 0
-            self.h_UFD = 0
             # 得到气隙线
             self.UAB_air_sq = np.linspace(0, 1.3, 131)  # 得到消除残压后的实际发电机本体的气隙线
+            #直接指定截距为0的原因是：剩磁并不是由励磁电流产生的，而是由于别的原因产生的，
+            #而空载特性是励磁电流与机端电压之间的关系，这种关系是从原点开始的，所以不用
+            #考虑剩磁的影响，直接将截距置0
+            self.h_IFD = 0
+            self.h_UFD = 0
             self.IFD_air_sq = (self.UAB_air_sq) / self.k_IFD
             self.UFD_air_sq = (self.UAB_air_sq) / self.k_UFD
 
@@ -397,28 +393,22 @@ class Main(QtWidgets.QMainWindow):
             self.UFD_air_100_value = (1.0) / self.k_UFD  # 1.0UN对应的励磁电压
             self.UFD_air_120_value = (1.2) / self.k_UFD  # 1.2UN对应的励磁电压
 
-            # 形成气隙线上1.0及1.2倍UN的下垂线
+            # 形成气隙线上1.0及1.2倍UN的下垂线数据
+            #linspace有一个很好的特性是，如果第一和第二参数是一致的，那么将会生成一系列相同的点
             self.UAB_air_100_vertical_sq = np.linspace(0, 1.0, 141)  # 注意点数要都一致
-            self.IFD_air_100_vertical_sq = np.linspace(self.IFD_air_100_value,
-                                                       self.IFD_air_100_value,
-                                                       141)
+            self.IFD_air_100_vertical_sq = np.linspace(self.IFD_air_100_value,self.IFD_air_100_value,141)
             self.UAB_air_120_vertical_sq = np.linspace(0, 1.2, 141)
-            self.IFD_air_120_vertical_sq = np.linspace(self.IFD_air_120_value,
-                                                       self.IFD_air_120_value,
-                                                       141)
-
+            self.IFD_air_120_vertical_sq = np.linspace(self.IFD_air_120_value,self.IFD_air_120_value,141)
             ###############################################################################
 
             # 计算空载特性曲线上的点
             # 根据PSASP说明书中空载曲线的形式为 IFD=a*UAB+b*UAB^n，a取为1，则实际未知参数只有b、n。
 
             # 空载特性曲线残差函数
-
             def residuals_saturation_curve(p):
                 b, n = p
-                # 标幺化后进行的计算，否则误差会很大,UAB为实际上的电压，需要减去h
-                return self.IFD / self.IFD_air_100_value - (self.UAB + b *
-                                                            (self.UAB)**n)
+            # 需要对IFD进行标幺化后再进行计算，否则误差会很大，UAB为实际上的电压，需要减去h
+                return   self.IFD / self.IFD_air_100_value - (self.UAB + b *(self.UAB)**n)
 
             # 进行计算前的初始化条件
             self.lb = np.array([0.01, 0.01])
@@ -432,25 +422,14 @@ class Main(QtWidgets.QMainWindow):
             self.b, self.n = self.res2.x
             self.a = 1
 
-            #print ("a=",1," b=",b," n=",n,"\n")
-            #print ("cost=",res2.cost)
-
             # 得到空载特性曲线
             self.UAB_saturation_sq = np.linspace(0, 1.22, 141)
-            self.IFD_saturation_sq = (self.UAB_saturation_sq +
-                                      self.b * self.UAB_saturation_sq**self.n
-                                      ) * self.IFD_air_100_value
-            self.UFD_saturation_sq = (self.UAB_saturation_sq +
-                                      self.b * self.UAB_saturation_sq**self.n
-                                      ) * self.UFD_air_100_value
+            self.IFD_saturation_sq = (self.UAB_saturation_sq + self.b * self.UAB_saturation_sq**self.n) * self.IFD_air_100_value
+            self.UFD_saturation_sq = (self.UAB_saturation_sq + self.b * self.UAB_saturation_sq**self.n) * self.UFD_air_100_value
 
             # 计算空载特性曲线上的点
-            self.IFD_sat_100_value = (
-                1 +
-                self.b * 1**self.n) * self.IFD_air_100_value  # 1.0UN对应的励磁电流
-            self.IFD_sat_120_value = (
-                1.2 +
-                self.b * 1.2**self.n) * self.IFD_air_100_value  # 1.2UN对应的励磁电流
+            self.IFD_sat_100_value = (1 + self.b * 1**self.n) * self.IFD_air_100_value  # 1.0UN对应的励磁电流
+            self.IFD_sat_120_value = (1.2 +self.b * 1.2**self.n) * self.IFD_air_100_value  # 1.2UN对应的励磁电流
 
             # 形成空载特性曲线上1.0及1.2倍UN的下垂线
             self.UAB_sat_100_vertical_sq = np.linspace(0, 1.0, 141)  # 注意点数要都一致
