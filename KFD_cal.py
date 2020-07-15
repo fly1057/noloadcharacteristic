@@ -341,7 +341,7 @@ class Main(QtWidgets.QMainWindow):
             #5  nolinear fitting using all data to  get  a,b,n. This time we also using the data of UAB in step 2
             #6  calculate the IFD01.0 and IFD01.2 according to the a,b,n
             #7  calculate the KFD .   
-            self.UpdateSelfFromPanel()
+            self.UpdateSelfFromPanel() 
             #（1） 选取前部分数据进行计算
             self.df.columns = ['UAB', 'UFD', 'IFD']
             # 截取上升段的数据，注意需要找到最大值index后加1
