@@ -468,7 +468,8 @@ class Main(QtWidgets.QMainWindow):
             self.UFDBseq = []
             self.KFDseq = []
 
-            self.XcReal = self.ULN**2/self.STN*self.Uk*3.0/np.pi  #有名值，包含了换相导致的系数3/pi
+            self.XcReal = self.ULN**2/self.STN*self.Uk  #有名值，不包含了换相导致的系数3/pi
+            self.XcRealEqual = self.XcReal*3.0/np.pi  #有名值，包含了换相导致的系数3/pi
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
                 if i == 0:
@@ -476,7 +477,7 @@ class Main(QtWidgets.QMainWindow):
                 else:
                     self.IFDBseq.append((self.IFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
                     self.UFDBseq.append((self.UFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
-                    self.KFDseq.append(1.35*self.ULN*self.UAB_saturation_sq[i]/((self.UFD_saturation_sq[i]+self.IFD_saturation_sq[i]*self.XcReal)/(1 + self.SG[i]))
+                    self.KFDseq.append(1.35*self.ULN*self.UAB_saturation_sq[i]/((self.UFD_saturation_sq[i]+self.IFD_saturation_sq[i]*self.XcRealEqual)/(1 + self.SG[i]))
                     )
 
             print("IFDB = ", self.IFDBseq)
