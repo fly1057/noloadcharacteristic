@@ -489,7 +489,7 @@ class Main(QtWidgets.QMainWindow):
             self.KFD = self.KFDseq[0]
             self.Xcpu = self.XcReal / (self.UFDB / self.IFDB)
 
-            self.AngleScopeCalculate()
+            self.AngleScopeCalculate() 
 
             ###############################################################################
 
