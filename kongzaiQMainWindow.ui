@@ -366,7 +366,7 @@
       <rect>
        <x>10</x>
        <y>50</y>
-       <width>91</width>
+       <width>97</width>
        <height>161</height>
       </rect>
      </property>
@@ -675,7 +675,7 @@
     <property name="title">
      <string>空载特性计算结果</string>
     </property>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>

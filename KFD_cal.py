@@ -242,7 +242,7 @@ class Main(QtWidgets.QMainWindow):
     def UpdateSelfFromPanel(self):
         try:
             print("begin UpdateSelfFromPanel")
-            self.LinearScope = float(self.ui.lineEdit_LinearScope.text())
+            self.LinearScale = float(self.ui.lineEdit_LinearScale.text())
             self.STN = float(self.ui.lineEdit_STN.text())*1000
             self.Uk = float(self.ui.lineEdit_Uk.text())
             self.ULN = float(self.ui.lineEdit_ULN.text())
@@ -391,7 +391,7 @@ class Main(QtWidgets.QMainWindow):
             # 通过UAB[(UAB>0.35)&(UAB<0.45)].index.get_values()得到index的array
             # 由于head需要int型变量，那么array是不行的，取个巧，取这个array的最大
             # 值得到index的int值
-            tempindex = self.UAB[(self.UAB > self.LinearScope) & (self.UAB < 1.2*self.LinearScope)].index.to_numpy().max()
+            tempindex = self.UAB[(self.UAB > self.LinearScale) & (self.UAB < 1.2*self.LinearScale)].index.to_numpy().max()
             self.UAB_40_sq = self.UAB.head(tempindex)
             self.IFD_40_sq = self.IFD.head(tempindex)
             self.UFD_40_sq = self.UFD.head(tempindex)
