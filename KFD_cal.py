@@ -127,31 +127,31 @@ class Main(QtWidgets.QMainWindow):
                        horizontalalignment='center',
                        verticalalignment='center')
 
-            ax1f1.text(self.IFD_air_100_value / 5.0,
+            ax1f1.text(self.IFD_air_100_value / 5.5,
                        1,
                        'a=' + str(round(self.a, 3)),
                        horizontalalignment='center',
                        verticalalignment='center')
 
-            ax1f1.text(self.IFD_air_100_value / 5,
+            ax1f1.text(self.IFD_air_100_value / 5.5,
                        0.9,
                        'b=' + str(round(self.b, 3)),
                        horizontalalignment='center',
                        verticalalignment='center')
 
-            ax1f1.text(self.IFD_air_100_value / 5,
+            ax1f1.text(self.IFD_air_100_value / 5.5,
                        0.8,
                        'n=' + str(round(self.n, 3)),
                        horizontalalignment='center',
                        verticalalignment='center')
 
-            ax1f1.text(self.IFD_air_100_value / 5,
+            ax1f1.text(self.IFD_air_100_value / 5.5,
                        0.7,
                        'SG1.0=' + str(round(self.SG100, 3)),
                        horizontalalignment='center',
                        verticalalignment='center')
 
-            ax1f1.text(self.IFD_air_100_value / 5,
+            ax1f1.text(self.IFD_air_100_value / 5.5,
                        0.6,
                        'SG1.2=' + str(round(self.SG120, 3)),
                        horizontalalignment='center',
@@ -159,19 +159,25 @@ class Main(QtWidgets.QMainWindow):
 
             ax1f1.text(self.IFD_air_100_value / 2,
                        1,
-                       'IFDB=' + str(round(self.IFDB, 1)) + "A",
+                       'IFDB_std=' + str(round(self.IFDB_std, 1)) + "A",
                        horizontalalignment='center',
                        verticalalignment='center')
 
             ax1f1.text(self.IFD_air_100_value / 2,
                        0.9,
-                       'UFDB=' + str(round(self.UFDB, 1)) + "V",
+                       'UFDB_std=' + str(round(self.UFDB_std, 1)) + "V",
                        horizontalalignment='center',
                        verticalalignment='center')
 
             ax1f1.text(self.IFD_air_100_value / 2,
                        0.8,
-                       'KFD=' + str(round(self.KFD, 2)),
+                       'KFD_std=' + str(round(self.KFD_std, 2)),
+                       horizontalalignment='center',
+                       verticalalignment='center')
+
+            ax1f1.text(self.IFD_air_100_value / 2,
+                       0.7,
+                       'KFD_LL=' + str(round(self.KFD_LL, 2)),
                        horizontalalignment='center',
                        verticalalignment='center')
 
@@ -197,16 +203,17 @@ class Main(QtWidgets.QMainWindow):
             # 动态改变tablewidget的行数，保证行数是动态改变，不再要求上升阶段的点数是固定的
             # 可以先在qt designer里面改一下，然后借鉴里面的写法，和利用Excel的宏一样
             # df.shape是一个tuple，第一个参数是行数，第二个参数是列数
+
+
             self.ui.tableWidget_RawData.setRowCount(self.df.shape[0])
             self.ui.tableWidget_RawData.setColumnCount(self.df.shape[1])
 
             for i in np.arange(self.df.shape[0]):
                 for j in np.arange(self.df.shape[1]):
-                    self.ui.tableWidget_RawData.setItem(
-                        i, j,
-                        QtWidgets.QTableWidgetItem(str(
-                            self.df.iloc[i, j])))  # 这里必须采用str强制转换
+                    self.ui.tableWidget_RawData.setItem(i, j,QtWidgets.QTableWidgetItem(str(self.df.iloc[i, j])))  # 这里必须采用str强制转换
             print("end UpdateTableWidgetFromDataFrame")
+
+
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
@@ -219,6 +226,8 @@ class Main(QtWidgets.QMainWindow):
             self.STN = float(self.ui.lineEdit_STN.text())*1000
             self.Uk = float(self.ui.lineEdit_Uk.text())
             self.ULN = float(self.ui.lineEdit_ULN.text())
+            self.IFDN = float(self.ui.lineEdit_IFDN.text())
+            self.UFDN =  float(self.ui.lineEdit_UFDN.text())
 
             self.Rising1Ut = float(self.ui.lineEdit_Rising1Ut.text())
             self.Rising1Ufd = float(self.ui.lineEdit_Rising1Ufd.text())
@@ -245,17 +254,20 @@ class Main(QtWidgets.QMainWindow):
             print("begin UpdatePanelFromSelf")
             self.ui.lineEdit_XcReal.setText(str(self.XcReal))
             self.ui.lineEdit_XcRealEqual.setText(str(self.XcRealEqual))
-            lineEdit_XcEqualpu
-            self.ui.lineEdit_Xcpu.setText(str(self.Xcpu))
+            self.ui.lineEdit_XcpuEqual.setText(str(self.XcpuEqual))
             self.ui.lineEdit_Rising1Angle.setText(str(self.Rising1Angle))
             self.ui.lineEdit_Rising2Angle.setText(str(self.Rising2Angle))
             self.ui.lineEdit_Falling1Angle.setText(str(self.Falling1Angle))
             self.ui.lineEdit_Falling2Angle.setText(str(self.Falling2Angle))
             self.ui.lineEdit_AngleAVGmax.setText(str(self.AngleAVGmax))
             self.ui.lineEdit_AngleAVGmin.setText(str(self.AngleAVGmin))
-            self.ui.lineEdit_IFDB.setText(str(self.IFDB))
-            self.ui.lineEdit_UFDB.setText(str(self.UFDB))
-            self.ui.lineEdit_KFD.setText(str(self.KFD))
+
+            self.ui.lineEdit_IFDB_std.setText(str(self.IFDB_std))
+            self.ui.lineEdit_UFDB_std.setText(str(self.UFDB_std))
+            self.ui.lineEdit_KFD_std.setText(str(self.KFD_std))
+            self.ui.lineEdit_UFDB_LL.setText(str(self.UFDB_LL))
+            self.ui.lineEdit_KFD_LL.setText(str(self.KFD_LL))
+
             self.ui.lineEdit_Umax.setText(str(self.Umax))
             self.ui.lineEdit_Umin.setText(str(self.Umin))
             self.ui.lineEdit_a.setText(str(self.a))
@@ -272,9 +284,11 @@ class Main(QtWidgets.QMainWindow):
 
     def ShowResultsText(self):
         try:
-            self.ui.textBrowser.setText("IFDB=" + str(round(self.IFDB, 4)) + "\n"
-                                        "UFDB=" + str(round(self.UFDB, 4)) + "\n"
-                                        "KFD=" + str(round(self.KFD, 4)) + "\n"
+            self.ui.textBrowser.setText("IFDB_std=" + str(round(self.IFDB_std, 4)) + "\n"
+                                        "UFDB_std=" + str(round(self.UFDB_std, 4)) + "\n"
+                                        "KFD_std=" + str(round(self.KFD_std, 4)) + "\n"
+                                        "UFDB_LL=" + str(round(self.UFDB_LL, 4)) + "\n"
+                                        "KFD_LL=" + str(round(self.KFD_LL, 4)) + "\n"
                                         "a=" + str(self.a) + "\n"
                                         "b=" + str(round(self.b, 4)) + "\n"
                                         "n=" + str(round(self.n, 4)) + "\n"
@@ -310,9 +324,7 @@ class Main(QtWidgets.QMainWindow):
             self.canvas = FigureCanvas(fig)
             self.ui.verticalLayout_mpl.addWidget(self.canvas)
             self.canvas.draw()
-            self.toolbar = NavigationToolbar(self.canvas,
-                                             self,
-                                             coordinates=True)
+            self.toolbar = NavigationToolbar(self.canvas,self,coordinates=True)
             self.ui.verticalLayout_mpl.addWidget(self.toolbar)
         except Exception as e:
             print(e)
@@ -347,7 +359,6 @@ class Main(QtWidgets.QMainWindow):
             #（1） 选取前部分数据进行计算
             self.df.columns = ['UAB', 'UFD', 'IFD']
             # 截取上升段的数据，注意需要找到最大值index后加1
-
             self.UAB = self.df.UAB[0:(self.df.UAB.idxmax() + 1)]
             self.IFD = self.df.IFD[0:(self.df.IFD.idxmax() + 1)]
             self.UFD = self.df.UFD[0:(self.df.UFD.idxmax() + 1)]
@@ -360,19 +371,16 @@ class Main(QtWidgets.QMainWindow):
             # 通过UAB[(UAB>0.35)&(UAB<0.45)].index.get_values()得到index的array
             # 由于head需要int型变量，那么array是不行的，取个巧，取这个array的最大
             # 值得到index的int值
-            tempindex = self.UAB[(self.UAB > self.LinearScope) & (self.UAB < 1.2*self.LinearScope)]\
-                        .index.to_numpy().max()
+            tempindex = self.UAB[(self.UAB > self.LinearScope) & (self.UAB < 1.2*self.LinearScope)].index.to_numpy().max()
             self.UAB_40_sq = self.UAB.head(tempindex)
             self.IFD_40_sq = self.IFD.head(tempindex)
             self.UFD_40_sq = self.UFD.head(tempindex)
 
             ###############################################################################
             # （2）线性拟合
-
             def residuals_airgap_line_IFD(p):
                 k, h = p
                 return self.UAB_40_sq - (k * self.IFD_40_sq + h)
-
             def residuals_airgap_line_UFD(p):
                 k, h = p
                 return self.UAB_40_sq - (k * self.UFD_40_sq + h)
@@ -418,7 +426,7 @@ class Main(QtWidgets.QMainWindow):
             def residuals_saturation_curve(p):
                 b, n = p
             # 需要对IFD进行标幺化后再进行计算，否则误差会很大，UAB为实际上的电压，需要减去h
-                return   self.IFD / self.IFD_air_100_value - (self.UAB + b *(self.UAB)**n)
+                return   self.IFD/self.IFD_air_100_value - (self.UAB+b*(self.UAB)**n)
 
             # 进行计算前的初始化条件
             self.lb = np.array([0.01, 0.01])
@@ -466,9 +474,9 @@ class Main(QtWidgets.QMainWindow):
             print("SG = ", self.SG)
 
             #考察每个饱和点对应的气隙线上的点
-            self.IFDBseq = []
-            self.UFDBseq = []
-            self.KFDseq = []
+            self.IFDB_seq = []
+            self.UFDB_seq = []
+            self.KFD_seq = []
 
             self.XcReal = self.ULN**2/self.STN*self.Uk  #有名值，不包含了换相导致的系数3/pi
             self.XcRealEqual = self.XcReal*3.0/np.pi  #有名值，包含了换相导致的系数3/pi
@@ -479,19 +487,20 @@ class Main(QtWidgets.QMainWindow):
                 else:
                     # (self.IFD_saturation_sq[i]/ (1 + self.SG[i])) we got the linear Ifd , because 
                     # UAB = Ifd/ IFDB ,so Ifd / UAB we got IFDB , so as to UFDB
-                    self.IFDBseq.append((self.IFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
-                    self.UFDBseq.append((self.UFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
-                    self.KFDseq.append(1.35*self.ULN*self.UAB_saturation_sq[i]/((self.UFD_saturation_sq[i]+self.IFD_saturation_sq[i]*self.XcRealEqual)/(1 + self.SG[i]))
-                    )
+                    self.IFDB_seq.append((self.IFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
+                    self.UFDB_seq.append((self.UFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
+                    self.KFD_seq.append(1.35*self.ULN*self.UAB_saturation_sq[i]/((self.UFD_saturation_sq[i]+self.IFD_saturation_sq[i]*self.XcRealEqual)/(1 + self.SG[i])))
 
-            print("IFDB = ", self.IFDBseq)
-            print("UFDB = ", self.UFDBseq)
-            print("KFD = ", self.KFDseq)
-
-            self.UFDB = self.UFDBseq[0]
-            self.IFDB = self.IFDBseq[0]
-            self.KFD = self.KFDseq[0]
-            self.Xcpu = self.XcReal / (self.UFDB / self.IFDB)
+            print("IFDB = ", self.IFDB_seq)
+            print("UFDB = ", self.UFDB_seq)
+            print("KFD = ", self.KFD_seq)
+            
+            self.IFDB_std = self.IFDB_seq[0]
+            self.UFDB_std =  self.IFDB_std*self.UFDN/self.IFDN
+            self.KFD_std = 1.35*self.ULN/self.UFDB_std
+            self.UFDB_LL = self.UFDB_seq[0]
+            self.KFD_LL = self.KFD_seq[0]
+            self.XcpuEqual = self.XcRealEqual / (self.UFDB_std / self.IFDB_std)
 
             self.AngleScopeCalculate() 
 
@@ -510,22 +519,16 @@ class Main(QtWidgets.QMainWindow):
         try:
             # 根据panel更新self
             self.UpdateSelfFromPanel()
-            
-            self.XcReal = self.ULN**2/self.STN*self.Uk*3.0/np.pi 
 
             self.Rising1Angle = 180/np.pi * \
-                np.arccos((self.Rising1Ufd + self.Rising1Ifd *
-                           self.XcReal)/(1.35*self.ULN*self.Rising1Ut))
+                np.arccos((self.Rising1Ufd + self.Rising1Ifd *self.XcRealEqual)/(1.35*self.ULN*self.Rising1Ut))
             self.Rising2Angle = 180/np.pi * \
-                np.arccos((self.Rising2Ufd + self.Rising2Ifd *
-                           self.XcReal)/(1.35*self.ULN*self.Rising2Ut))
+                np.arccos((self.Rising2Ufd + self.Rising2Ifd *self.XcRealEqual)/(1.35*self.ULN*self.Rising2Ut))
 
             self.Falling1Angle = 180/np.pi * \
-                np.arccos((self.Falling1Ufd + self.Falling1Ifd *
-                           self.XcReal)/(1.35*self.ULN*self.Falling1Ut))
+                np.arccos((self.Falling1Ufd + self.Falling1Ifd *self.XcRealEqual)/(1.35*self.ULN*self.Falling1Ut))
             self.Falling2Angle = 180/np.pi * \
-                np.arccos((self.Falling2Ufd + self.Falling2Ifd *
-                           self.XcReal)/(1.35*self.ULN*self.Falling2Ut))
+                np.arccos((self.Falling2Ufd + self.Falling2Ifd *self.XcRealEqual)/(1.35*self.ULN*self.Falling2Ut))
 
             self.AngleAVGmin = np.average(
                 [self.Rising1Angle, self.Rising2Angle])
@@ -533,9 +536,9 @@ class Main(QtWidgets.QMainWindow):
                 [self.Falling1Angle, self.Falling2Angle])
 
             self.Umax = 1.35*self.ULN * \
-                np.cos(self.AngleAVGmin/180*np.pi) / self.UFDB
+                np.cos(self.AngleAVGmin/180*np.pi) / self.UFDB_std
             self.Umin = 1.35*self.ULN * \
-                np.cos(self.AngleAVGmax / 180 * np.pi) / self.UFDB
+                np.cos(self.AngleAVGmax/180*np.pi) / self.UFDB_std
 
             # 根据self更新panel和text
             self.UpdatePanelFromSelf()
