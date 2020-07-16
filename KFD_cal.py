@@ -22,6 +22,7 @@ class Main(QtWidgets.QMainWindow):
         # 控件与函数的连接  self+ui容器+控件+动作+connect（函数名称）
         self.ui.pushButton_NoLoadCalculateAutoCalculate.clicked.connect(self.NoLoadCalculateAutoCalculate)
         self.ui.pushButton_NoLoadCalculateReadCSV.clicked.connect(self.NoLoadCalculateReadCSV)
+        self.ui.pushButton_NoLoadCalculateSaveCSV.clicked.connect(self.NoLoadCalculateSaveCSV)
         self.ui.pushButton_Reset.clicked.connect(self.Reset)
         self.ui.pushButton_AngleScopeCalculate.clicked.connect(self.AngleScopeCalculate)
         self.Reset()
@@ -45,6 +46,25 @@ class Main(QtWidgets.QMainWindow):
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+    
+    def NoLoadCalculateSaveCSV(self):
+        try:
+            print("hello world! ReadCSV")
+            #openfile_name = ["C:/Users/ll/Desktop/zaoshi1.csv", 1]
+            openfile_name = QtWidgets.QFileDialog.getOpenFileName(
+                self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
+
+            # openfile_name是元组，第一个元素是路径
+            if openfile_name[0] == '':
+                QtWidgets.QMessageBox.information(self, "保存CSV", "已经放弃保存文件",
+                                                  QtWidgets.QMessageBox.Yes)
+            else:
+                pd.save_csv(self.df )
+            self.UpdateTableWidgetFromDataFrame()
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数    
 
     def Reset(self):
         try:
@@ -502,10 +522,8 @@ class Main(QtWidgets.QMainWindow):
             self.KFD_LL = self.KFD_seq[0]
             self.XcpuEqual = self.XcRealEqual / (self.UFDB_std / self.IFDB_std)
 
-            self.AngleScopeCalculate() 
-
             ###############################################################################
-
+            self.AngleScopeCalculate()
             self.ShowPlot()
             self.UpdatePanelFromSelf()
             self.ShowResultsText()
