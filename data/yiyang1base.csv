@@ -1,4 +1,4 @@
-parameters,value,UAB(p.u.),UFD(V),IFD(A)
+parameters,value,UAB,UFD,IFD
 LinearScale,0.45,0.6645,0.8785,0.2666
 STN,3270,0.6675,0.8488,0.1468
 Uk,0.065,10.273,15.694,96.592

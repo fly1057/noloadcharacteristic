@@ -46,7 +46,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="lineEdit_LinearScope">
+         <widget class="QLineEdit" name="lineEdit_LinearScale">
           <property name="text">
            <string>0.45</string>
           </property>
