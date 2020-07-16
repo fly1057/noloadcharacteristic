@@ -244,6 +244,8 @@ class Main(QtWidgets.QMainWindow):
         try:
             print("begin UpdatePanelFromSelf")
             self.ui.lineEdit_XcReal.setText(str(self.XcReal))
+            self.ui.lineEdit_XcRealEqual.setText(str(self.XcRealEqual))
+            lineEdit_XcEqualpu
             self.ui.lineEdit_Xcpu.setText(str(self.Xcpu))
             self.ui.lineEdit_Rising1Angle.setText(str(self.Rising1Angle))
             self.ui.lineEdit_Rising2Angle.setText(str(self.Rising2Angle))
@@ -332,16 +334,16 @@ class Main(QtWidgets.QMainWindow):
     def NoLoadCalculateAutoCalculate(self):
         try:
             #1 pick up the linear data ，that is UAB and Ifd，such as UAB <0.4 ，could be choosen according HMI ,
-            # and then pick up the same scale of Ifd and Ufd according the index 
+            # and then pick up the same scale of Ifd and Ufd according to the index 
             #2 linear fitting using the picked data ,then got the line UAB = k*IFD+h, UAB is in p.u.,IFD is in real
             # then  UAB -h to get the new UAB 
             # 舍弃h理由是，残差电压并非由励磁电流引起，因此需要舍弃，空载特性应该是以Ifd从0开始.
-            #3  calculate the basement of IFD . UAB(1.0)/k ,we got the IFDB , according the same method we got the UFDB
-            #4  calculate IFDB1.2 ,UFDB1.2 , according to the airline 
+            #3  calculate the basevalue of IFD . By UAB(1.0)/k ,we got the IFDB , according the same method we got the UFDB
+            #4  calculate IFDB1.2 ,UFDB1.2 according to the airline 
             #5  nolinear fitting using all data to  get  a,b,n. This time we also using the data of UAB in step 2
             #6  calculate the IFD01.0 and IFD01.2 according to the a,b,n
             #7  calculate the KFD .   
-            self.UpdateSelfFromPanel()
+            self.UpdateSelfFromPanel() 
             #（1） 选取前部分数据进行计算
             self.df.columns = ['UAB', 'UFD', 'IFD']
             # 截取上升段的数据，注意需要找到最大值index后加1
@@ -468,7 +470,8 @@ class Main(QtWidgets.QMainWindow):
             self.UFDBseq = []
             self.KFDseq = []
 
-            self.XcReal = self.ULN**2/self.STN*self.Uk*3.0/np.pi  #有名值，包含了换相导致的系数3/pi
+            self.XcReal = self.ULN**2/self.STN*self.Uk  #有名值，不包含了换相导致的系数3/pi
+            self.XcRealEqual = self.XcReal*3.0/np.pi  #有名值，包含了换相导致的系数3/pi
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
                 if i == 0:
@@ -478,7 +481,7 @@ class Main(QtWidgets.QMainWindow):
                     # UAB = Ifd/ IFDB ,so Ifd / UAB we got IFDB , so as to UFDB
                     self.IFDBseq.append((self.IFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
                     self.UFDBseq.append((self.UFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
-                    self.KFDseq.append(1.35*self.ULN*self.UAB_saturation_sq[i]/((self.UFD_saturation_sq[i]+self.IFD_saturation_sq[i]*self.XcReal)/(1 + self.SG[i]))
+                    self.KFDseq.append(1.35*self.ULN*self.UAB_saturation_sq[i]/((self.UFD_saturation_sq[i]+self.IFD_saturation_sq[i]*self.XcRealEqual)/(1 + self.SG[i]))
                     )
 
             print("IFDB = ", self.IFDBseq)
@@ -490,7 +493,7 @@ class Main(QtWidgets.QMainWindow):
             self.KFD = self.KFDseq[0]
             self.Xcpu = self.XcReal / (self.UFDB / self.IFDB)
 
-            self.AngleScopeCalculate()
+            self.AngleScopeCalculate() 
 
             ###############################################################################
 
