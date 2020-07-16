@@ -92,9 +92,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>230</y>
+      <y>250</y>
       <width>681</width>
-      <height>481</height>
+      <height>461</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_mpl"/>
@@ -105,7 +105,7 @@
       <x>130</x>
       <y>10</y>
       <width>191</width>
-      <height>171</height>
+      <height>191</height>
      </rect>
     </property>
     <property name="title">
@@ -117,7 +117,7 @@
        <x>10</x>
        <y>20</y>
        <width>171</width>
-       <height>141</height>
+       <height>158</height>
       </rect>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -305,7 +305,7 @@
       <x>570</x>
       <y>10</y>
       <width>441</width>
-      <height>211</height>
+      <height>241</height>
      </rect>
     </property>
     <property name="acceptDrops">
@@ -373,7 +373,7 @@
        <x>120</x>
        <y>20</y>
        <width>311</width>
-       <height>181</height>
+       <height>212</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout">
@@ -616,9 +616,9 @@
     <property name="geometry">
      <rect>
       <x>690</x>
-      <y>230</y>
+      <y>250</y>
       <width>311</width>
-      <height>481</height>
+      <height>461</height>
      </rect>
     </property>
    </widget>

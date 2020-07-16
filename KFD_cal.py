@@ -474,6 +474,8 @@ class Main(QtWidgets.QMainWindow):
                 if i == 0:
                     pass
                 else:
+                    # (self.IFD_saturation_sq[i]/ (1 + self.SG[i])) we got the linear Ifd , because 
+                    # UAB = Ifd/ IFDB ,so Ifd / UAB we got IFDB , so as to UFDB
                     self.IFDBseq.append((self.IFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
                     self.UFDBseq.append((self.UFD_saturation_sq[i]/ (1 + self.SG[i]))/ self.UAB_saturation_sq[i])
                     self.KFDseq.append(1.35*self.ULN*self.UAB_saturation_sq[i]/((self.UFD_saturation_sq[i]+self.IFD_saturation_sq[i]*self.XcReal)/(1 + self.SG[i]))
@@ -505,6 +507,8 @@ class Main(QtWidgets.QMainWindow):
         try:
             # 根据panel更新self
             self.UpdateSelfFromPanel()
+            
+            self.XcReal = self.ULN**2/self.STN*self.Uk*3.0/np.pi 
 
             self.Rising1Angle = 180/np.pi * \
                 np.arccos((self.Rising1Ufd + self.Rising1Ifd *
