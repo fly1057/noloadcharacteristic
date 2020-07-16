@@ -224,13 +224,19 @@ class Main(QtWidgets.QMainWindow):
             # 可以先在qt designer里面改一下，然后借鉴里面的写法，和利用Excel的宏一样
             # df.shape是一个tuple，第一个参数是行数，第二个参数是列数
 
+            self.UAB = self.df["UAB"].dropna()
+            self.UFD = self.df["UFD"].dropna()
+            self.IFD = self.df["IFD"].dropna()
+            self.ui.LinearScale = self.df['value'].iloc(0,1)
+            self.ui.lineEdit_LinearScale.setText(str(self.df['value'].iloc(0,1)))
 
-            self.ui.tableWidget_RawData.setRowCount(self.df.shape[0])
-            self.ui.tableWidget_RawData.setColumnCount(self.df.shape[1])
+            self.dftemp = pd.DataFrame({'UAB':self.UAB,'UFD':self.UFD,'IFD':self.IFD})
+            self.ui.tableWidget_RawData.setRowCount(self.dftemp.shape[0])
+            self.ui.tableWidget_RawData.setColumnCount(self.dftemp.shape[1])
 
-            for i in np.arange(self.df.shape[0]):
-                for j in np.arange(self.df.shape[1]):
-                    self.ui.tableWidget_RawData.setItem(i, j,QtWidgets.QTableWidgetItem(str(self.df.iloc[i, j])))  # 这里必须采用str强制转换
+            for i in np.arange(self.dftemp.shape[0]):
+                for j in np.arange(self.dftemp.shape[1]):
+                    self.ui.tableWidget_RawData.setItem(i, j,QtWidgets.QTableWidgetItem(str(self.dftemp.iloc[i, j])))  # 这里必须采用str强制转换
             print("end UpdateTableWidgetFromDataFrame")
 
 
