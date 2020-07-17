@@ -2,6 +2,7 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtCore import Qt
 import numpy as np
+from numpy.lib.shape_base import column_stack
 import pandas as pd
 from Ui_kongzaiQMainWindow import Ui_MainWindow
 from matplotlib.figure import Figure
@@ -265,6 +266,10 @@ class Main(QtWidgets.QMainWindow):
                 temp = self.findChild(QtWidgets.QLineEdit,"lineEdit_"+self.df.loc[i,"parameters"])
                 self.df.loc[i,'value'] = float(temp.text())
 
+
+            rowcount = self.ui.tableWidget_RawData.rowCount()
+            columncount = self.ui.tableWidget_RawData.columnCount()
+            #构造一个rowcount*columncont的df
             temp = pd.DataFrame({'UAB':self.UAB,'UFD':self.UFD,'IFD':self.IFD})
             self.ui.tableWidget_RawData.setRowCount(temp.shape[0])
             self.ui.tableWidget_RawData.setColumnCount(temp.shape[1])
