@@ -41,7 +41,7 @@ class Main(QtWidgets.QMainWindow):
             else:
                 self.df = pd.read_csv(openfile_name[0])
                 print(self.df)
-            self.UpdateTableWidgetFromDataFrame()
+            self.UpdatePanelFromDataFrame()
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
@@ -60,7 +60,7 @@ class Main(QtWidgets.QMainWindow):
                                                   QtWidgets.QMessageBox.Yes)
             else:
                 pd.save_csv(self.df )
-            self.UpdateTableWidgetFromDataFrame()
+            self.UpdatePanelFromDataFrame()
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
@@ -217,9 +217,9 @@ class Main(QtWidgets.QMainWindow):
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
-    def UpdateTableWidgetFromDataFrame(self):
+    def UpdatePanelFromDataFrame(self):
         try:
-            print("begin UpdateTableWidgetFromDataFrame")
+            print("begin UpdatePanelFromDataFrame")
             # 动态改变tablewidget的行数，保证行数是动态改变，不再要求上升阶段的点数是固定的
             # 可以先在qt designer里面改一下，然后借鉴里面的写法，和利用Excel的宏一样
             # df.shape是一个tuple，第一个参数是行数，第二个参数是列数
@@ -227,23 +227,30 @@ class Main(QtWidgets.QMainWindow):
             self.UAB = self.df["UAB"].dropna()
             self.UFD = self.df["UFD"].dropna()
             self.IFD = self.df["IFD"].dropna()
-            self.ui.LinearScale = self.df['value'].iloc(0,1)
-            self.ui.lineEdit_LinearScale.setText(str(self.df['value'].iloc(0,1)))
 
-            self.dftemp = pd.DataFrame({'UAB':self.UAB,'UFD':self.UFD,'IFD':self.IFD})
-            self.ui.tableWidget_RawData.setRowCount(self.dftemp.shape[0])
-            self.ui.tableWidget_RawData.setColumnCount(self.dftemp.shape[1])
+            for i  in  np.arange(len(self.df['value'])):
+                temp = self.findChild(QtWidgets.QLineEdit,"lineEdit_"+self.df["parameters"].iloc[i])
+                temp.setText(str(self.df['value'].iloc[i]))
 
-            for i in np.arange(self.dftemp.shape[0]):
-                for j in np.arange(self.dftemp.shape[1]):
-                    self.ui.tableWidget_RawData.setItem(i, j,QtWidgets.QTableWidgetItem(str(self.dftemp.iloc[i, j])))  # 这里必须采用str强制转换
-            print("end UpdateTableWidgetFromDataFrame")
+            temp = pd.DataFrame({'UAB':self.UAB,'UFD':self.UFD,'IFD':self.IFD})
+            self.ui.tableWidget_RawData.setRowCount(temp.shape[0])
+            self.ui.tableWidget_RawData.setColumnCount(temp.shape[1])
+
+            for i in np.arange(temp.shape[0]):
+                for j in np.arange(temp.shape[1]):
+                    self.ui.tableWidget_RawData.setItem(i, j,QtWidgets.QTableWidgetItem(str(temp.iloc[i, j])))  # 这里必须采用str强制转换
+            print("end UpdatePanelFromDataFrame")
 
 
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+    
+    def UpdateDataFrameFromPanel(self):
+
+        pass 
+
 
     def UpdateSelfFromPanel(self):
         try:
@@ -383,12 +390,6 @@ class Main(QtWidgets.QMainWindow):
             #7  calculate the KFD .   
             self.UpdateSelfFromPanel() 
             #（1） 选取前部分数据进行计算
-            self.df.columns = ['UAB', 'UFD', 'IFD']
-            # 截取上升段的数据，注意需要找到最大值index后加1
-            self.UAB = self.df.UAB[0:(self.df.UAB.idxmax() + 1)]
-            self.IFD = self.df.IFD[0:(self.df.IFD.idxmax() + 1)]
-            self.UFD = self.df.UFD[0:(self.df.UFD.idxmax() + 1)]
-
             # 首先做一个判断，UAB是百分数还是标幺值，最终转换为标幺值
             if self.UAB.max() > 50:
                 self.UAB = self.UAB / 100

@@ -48,7 +48,7 @@
         <item>
          <widget class="QLineEdit" name="lineEdit_LinearScale">
           <property name="text">
-           <string>0.45</string>
+           <string/>
           </property>
           <property name="maxLength">
            <number>7</number>
@@ -190,7 +190,7 @@
         <item>
          <widget class="QLineEdit" name="lineEdit_STN">
           <property name="text">
-           <string>3270</string>
+           <string/>
           </property>
           <property name="maxLength">
            <number>7</number>
@@ -200,7 +200,7 @@
         <item>
          <widget class="QLineEdit" name="lineEdit_Uk">
           <property name="text">
-           <string>0.065</string>
+           <string/>
           </property>
           <property name="maxLength">
            <number>7</number>
@@ -210,7 +210,7 @@
         <item>
          <widget class="QLineEdit" name="lineEdit_ULN">
           <property name="text">
-           <string>743</string>
+           <string/>
           </property>
           <property name="maxLength">
            <number>7</number>
@@ -326,7 +326,7 @@
     </row>
     <column>
      <property name="text">
-      <string>UAB(%)</string>
+      <string>UAB(p.u.)</string>
      </property>
     </column>
     <column>
@@ -449,7 +449,7 @@
       <item row="1" column="0">
        <widget class="QLineEdit" name="lineEdit_Rising1Ut">
         <property name="text">
-         <string>0.72469</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -459,7 +459,7 @@
       <item row="1" column="1">
        <widget class="QLineEdit" name="lineEdit_Rising2Ut">
         <property name="text">
-         <string>0.77703</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -469,7 +469,7 @@
       <item row="1" column="2">
        <widget class="QLineEdit" name="lineEdit_Falling1Ut">
         <property name="text">
-         <string>0.88462</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -479,7 +479,7 @@
       <item row="1" column="3">
        <widget class="QLineEdit" name="lineEdit_Falling2Ut">
         <property name="text">
-         <string>0.87319</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -489,7 +489,7 @@
       <item row="2" column="0">
        <widget class="QLineEdit" name="lineEdit_Rising1Ufd">
         <property name="text">
-         <string>669.08</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -499,7 +499,7 @@
       <item row="2" column="1">
        <widget class="QLineEdit" name="lineEdit_Rising2Ufd">
         <property name="text">
-         <string>713.90</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -509,7 +509,7 @@
       <item row="2" column="2">
        <widget class="QLineEdit" name="lineEdit_Falling1Ufd">
         <property name="text">
-         <string>-671.84</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -519,7 +519,7 @@
       <item row="2" column="3">
        <widget class="QLineEdit" name="lineEdit_Falling2Ufd">
         <property name="text">
-         <string>-662.7</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -529,7 +529,7 @@
       <item row="3" column="0">
        <widget class="QLineEdit" name="lineEdit_Rising1Ifd">
         <property name="text">
-         <string>1194.8</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -539,7 +539,7 @@
       <item row="3" column="1">
        <widget class="QLineEdit" name="lineEdit_Rising2Ifd">
         <property name="text">
-         <string>1553.6</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -549,7 +549,7 @@
       <item row="3" column="2">
        <widget class="QLineEdit" name="lineEdit_Falling1Ifd">
         <property name="text">
-         <string>256.13</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -559,7 +559,7 @@
       <item row="3" column="3">
        <widget class="QLineEdit" name="lineEdit_Falling2Ifd">
         <property name="text">
-         <string>136.61</string>
+         <string/>
         </property>
         <property name="maxLength">
          <number>7</number>
@@ -707,7 +707,7 @@
       <item row="0" column="1">
        <widget class="QLineEdit" name="lineEdit_IFDN">
         <property name="text">
-         <string>2756</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -733,7 +733,7 @@
       <item row="0" column="3">
        <widget class="QLineEdit" name="lineEdit_UFDN">
         <property name="text">
-         <string>356</string>
+         <string/>
         </property>
        </widget>
       </item>
@@ -914,7 +914,7 @@
       <item row="4" column="2">
        <widget class="QLabel" name="label_28">
         <property name="text">
-         <string>SG1.0</string>
+         <string>SG100</string>
         </property>
        </widget>
       </item>
@@ -1015,7 +1015,7 @@
       <item row="5" column="2">
        <widget class="QLabel" name="label_31">
         <property name="text">
-         <string>SG1.2</string>
+         <string>SG120</string>
         </property>
        </widget>
       </item>
