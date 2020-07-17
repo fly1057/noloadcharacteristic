@@ -53,8 +53,8 @@ class Main(QtWidgets.QMainWindow):
             print("hello world! ReadCSV")
 
             self.UpdateDataFrameFromPanel()
-            #openfile_name = ["C:/Users/ll/Desktop/zaoshi1.csv", 1]
-            openfile_name = QtWidgets.QFileDialog.getOpenFileName(
+            openfile_name = QtWidgets.QFileDialog.
+            getOpenFileName(
                 self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
             # openfile_name是元组，第一个元素是路径
@@ -62,7 +62,7 @@ class Main(QtWidgets.QMainWindow):
                 QtWidgets.QMessageBox.information(self, "保存CSV", "已经放弃保存文件",
                                                   QtWidgets.QMessageBox.Yes)
             else:
-                pd.save_csv(self.df )
+                self.df.to_csv(openfile_name[0],index = False)
             self.UpdatePanelFromDataFrame()
         except Exception as e:
             print(e)
@@ -235,6 +235,7 @@ class Main(QtWidgets.QMainWindow):
                 temp = self.findChild(QtWidgets.QLineEdit,"lineEdit_"+self.df["parameters"].iloc[i])
                 temp.setText(str(self.df['value'].iloc[i]))
 
+            #构造在panel上构造TableWidget
             temp = pd.DataFrame({'UAB':self.UAB,'UFD':self.UFD,'IFD':self.IFD})
             self.ui.tableWidget_RawData.setRowCount(temp.shape[0])
             self.ui.tableWidget_RawData.setColumnCount(temp.shape[1])
@@ -254,32 +255,23 @@ class Main(QtWidgets.QMainWindow):
         try:
             print("begin UpdatePanelFromDataFrame")
 
-
-            self.df["UAB"] = self.UAB 
-            self.df["UFD"] = self.UFD 
-            self.df["IFD"] = self.IFD 
-
             #保证csv表中的名称和ui中的名称一致，这样就好通过循环索引
-            #将value中的变量值赋值给LineEdit对应的变量,不能使用iloc这种相对索引，
-            #应使用loc[i,string]这种绝对索引
+            #将value中的变量值赋值给LineEdit对应的变量。不能使用iloc这种相对索引，应使用loc[i,string]这种绝对索引
             for i  in  np.arange(len(self.df['value'])):
                 temp = self.findChild(QtWidgets.QLineEdit,"lineEdit_"+self.df.loc[i,"parameters"])
                 self.df.loc[i,'value'] = float(temp.text())
-
-
+            
+            #更新df中的UAB，UFD ,IFD
             rowcount = self.ui.tableWidget_RawData.rowCount()
             columncount = self.ui.tableWidget_RawData.columnCount()
-            #构造一个rowcount*columncont的df
-            temp = pd.DataFrame({'UAB':self.UAB,'UFD':self.UFD,'IFD':self.IFD})
-            self.ui.tableWidget_RawData.setRowCount(temp.shape[0])
-            self.ui.tableWidget_RawData.setColumnCount(temp.shape[1])
-
             # 动态改变tablewidget的行数，保证行数是动态改变，不再要求上升阶段的点数是固定的
             # 可以先在qt designer里面改一下，然后借鉴里面的写法，和利用Excel的宏一样
             # df.shape是一个tuple，第一个参数是行数，第二个参数是列数
-            for i in np.arange(temp.shape[0]):
-                for j in np.arange(temp.shape[1]):
-                    self.ui.tableWidget_RawData.setItem(i, j,QtWidgets.QTableWidgetItem(str(temp.iloc[i, j])))  # 这里必须采用str强制转换
+            for i in np.arange(rowcount):
+                for j in np.arange(columncount-2):
+                    self.df.iloc[i,2+j] =  float(self.ui.tableWidget_RawData.item(i,j).text())
+                #self.df.loc[i,"UFD"] =  float(self.ui.tableWidget_RawData.item(i,1).text())
+                #self.df.loc[i,"IFD"] =  float(self.ui.tableWidget_RawData.item(i,2).text())
             print("end UpdatePanelFromDataFrame")
 
 
