@@ -50,11 +50,10 @@ class Main(QtWidgets.QMainWindow):
     
     def NoLoadCalculateSaveCSV(self):
         try:
-            print("hello world! ReadCSV")
+            print("hello world! SaveCSV")
 
             self.UpdateDataFrameFromPanel()
-            openfile_name = QtWidgets.QFileDialog.
-            getOpenFileName(
+            openfile_name = QtWidgets.QFileDialog.getOpenFileName(
                 self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
             # openfile_name是元组，第一个元素是路径
