@@ -53,7 +53,7 @@ class Main(QtWidgets.QMainWindow):
             print("hello world! SaveCSV")
 
             self.UpdateDataFrameFromPanel()
-            openfile_name = QtWidgets.QFileDialog.getOpenFileName(
+            openfile_name = QtWidgets.QFileDialog.getSaveFileName(
                 self, '选择文件', '', '(*.csv ; *.xlsx ; *.xls )')
 
             # openfile_name是元组，第一个元素是路径
@@ -394,6 +394,7 @@ class Main(QtWidgets.QMainWindow):
 
     def rmmpl(self):  # 如果函数A内部有异常机制，那么可以随意在别的函数B里面调用A，不会影响函数B的流程
         try:
+            
             self.ui.verticalLayout_mpl.removeWidget(self.canvas)
             self.canvas.close()
             self.ui.verticalLayout_mpl.removeWidget(self.toolbar)
