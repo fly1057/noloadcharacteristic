@@ -5,11 +5,14 @@ import numpy as np
 from numpy.lib.shape_base import column_stack
 import pandas as pd
 from Ui_kongzaiQMainWindow import Ui_MainWindow
-from matplotlib.figure import Figure
+
+import matplotlib
+matplotlib.use("QT5Agg") #声明使用pyqt5
+#matplotlib.figure 模块提供了顶层的Artist（图中所有可见的元素都是Artist的子类）
+from matplotlib.figure import Figure 
 from matplotlib.backends.backend_qt5agg import (
-    FigureCanvasQTAgg as  # 不是FigureCanvasAgg，pyqt5已经更新了
-    FigureCanvas,
-    NavigationToolbar2QT as NavigationToolbar)
+    FigureCanvasQTAgg , #不是FigureCanvasAgg，pyqt5已经更新了
+    NavigationToolbar2QT) 
 from scipy.optimize import least_squares, leastsq
 
 
@@ -26,7 +29,7 @@ class Main(QtWidgets.QMainWindow):
         self.ui.pushButton_NoLoadCalculateSaveCSV.clicked.connect(self.NoLoadCalculateSaveCSV)
         self.ui.pushButton_Reset.clicked.connect(self.Reset)
         self.ui.pushButton_AngleScopeCalculate.clicked.connect(self.AngleScopeCalculate)
-        self.Reset()
+        #self.Reset()
 
     def NoLoadCalculateReadCSV(self):
         try:
@@ -70,6 +73,16 @@ class Main(QtWidgets.QMainWindow):
 
     def Reset(self):
         try:
+            data = {
+                    "parameters": ['STN','LinearScale','Uk','ULN','XcReal','XcRealEqual','XcpuEqual','IFDN','UFDN','IFDB_std','UFDB_std','KFD_std','UFDB_LL','KFD_LL','a','b','n','SG100','SG120','Rising1Ut','Rising1Ufd','Rising1Ifd','Rising2Ut','Rising2Ufd','Rising2Ifd','Falling1Ut','Falling1Ufd','Falling1Ifd','Falling2Ut','Falling2Ufd','Falling2Ifd','Rising1Angle','Rising2Angle','Falling1Angle','Falling2Angle','AngleAVGmin','AngleAVGmax','Umax','Umin'],
+                    "value":[3270,	0.45,	0.065,	743,	0.01097,	0.01047,	0.08112,	2756,	356,	913.119,	117.95,	8.50402,	97.8861,	9.33464,	1,	0.129,	8.12358,	0.129,	0.4727,	0.72469,	669.08,	1194.8,	0.77703,	713.9,	1553.6,	0.88462,	-671.84,	256.13,	0.87319,	-662.7,	136.61,	20.3344,	20.4711,	138.9497,	139.0253,	20.4027,	138.9875,	7.97052,	-6.4168],
+                    "UAB": [0.6675,	0.6645,	10.273,	15.525,	20.031,	25.143,	30.077,	35.122,	39.893,	45.493,	50.508,	55.407,	60.459,	65.167,	70.69,	75.275,	81.406,	86.352,	90.864,	95.453,	100.55,	105.48,	105.51,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN],
+                    "UFD": [0.8488,	0.8785,	15.694,	16.789,	20.657,	26.013,	30.409,	35.525,	40.178,	45.48,	50.405,	55.131,	60.198,	64.948,	70.971,	75.771,	83.003,	89.068,	94.779,	102.43,	111.62,	123.12,	123.3,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN],
+                    "IFD": [0.1468,	0.2666,	96.592,	139.06,	180.43,	227.25,	271.11,	316.37,	360.6,	411.27,	456.86,	501.18,	549.27,	594.55,	650.28,	693.56,	764.38,	824.47,	878.97,	943.32,	1032.3,	1137.7,	1138.4,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN,np.NaN]
+                    }
+            self.df = pd.DataFrame(data)
+            self.UpdatePanelFromDataFrame()
+
             # 如果函数A内部有异常机制，那么可以随意在别的函数B里面调用A，不会影响函数B的流程
             # 也就是说在self.rmmpl()内有异常机制，调用这个函数如果出现了错误也只会报异常
             # 还会在Reset里面继续走下去
@@ -78,6 +91,8 @@ class Main(QtWidgets.QMainWindow):
             ax1f1 = fig1.add_subplot(111)
             ax1f1.pcolormesh(np.random.rand(10, 10))
             self.addmpl(fig1)
+
+            
 
         except Exception as e:
             print(e)
@@ -213,7 +228,11 @@ class Main(QtWidgets.QMainWindow):
             ax1f1.axes.set_xlim([0, self.IFD_saturation_sq.max()])
             ax1f1.axes.set_ylim([0, 1.3])
 
+            #先增加再删，再增加
             self.addmpl(fig1)
+
+
+            
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
@@ -382,10 +401,10 @@ class Main(QtWidgets.QMainWindow):
 
     def addmpl(self, fig): 
         try:
-            self.canvas = FigureCanvas(fig)
+            self.canvas = FigureCanvasQTAgg(fig)
             self.ui.verticalLayout_mpl.addWidget(self.canvas)
             self.canvas.draw()
-            self.toolbar = NavigationToolbar(self.canvas,self,coordinates=True)
+            self.toolbar = NavigationToolbar2QT(self.canvas,self,coordinates=True)
             self.ui.verticalLayout_mpl.addWidget(self.toolbar)
         except Exception as e:
             print(e)
@@ -394,7 +413,6 @@ class Main(QtWidgets.QMainWindow):
 
     def rmmpl(self):  # 如果函数A内部有异常机制，那么可以随意在别的函数B里面调用A，不会影响函数B的流程
         try:
-            
             self.ui.verticalLayout_mpl.removeWidget(self.canvas)
             self.canvas.close()
             self.ui.verticalLayout_mpl.removeWidget(self.toolbar)
