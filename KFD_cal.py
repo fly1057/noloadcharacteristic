@@ -214,11 +214,11 @@ class Main(QtWidgets.QMainWindow):
                        horizontalalignment='center',
                        verticalalignment='center')
 
-            ax1f1.text(self.IFD_air_100_value / 2,
-                       0.7,
-                       'KFD_LL=' + str(round(self.KFD_LL, 2)),
-                       horizontalalignment='center',
-                       verticalalignment='center')
+            #ax1f1.text(self.IFD_air_100_value / 2,
+            #           0.7,
+            #           'KFD_LL=' + str(round(self.KFD_LL, 2)),
+            #           horizontalalignment='center',
+            #           verticalalignment='center')
 
             # 设定图像大小，像素，去除边框
             ax1f1.axes.spines['top'].set_visible(False)  # 去掉上边框
@@ -569,7 +569,7 @@ class Main(QtWidgets.QMainWindow):
             #计算后，更新是第一要务
             self.UpdateDataFrameFromSelf()
             self.UpdatePanelFromDataFrame()
-            self.AngleScopeCalculate()           
+            self.AngleScopeCalculate()  #不能放在更新之前，这个函数要根据panel更新self，如果放前面就错了         
             self.ShowPlot()
             self.ShowResultsText()
 
