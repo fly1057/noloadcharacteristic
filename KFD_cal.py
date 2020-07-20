@@ -251,17 +251,19 @@ class Main(QtWidgets.QMainWindow):
                 temp = self.findChild(QtWidgets.QLineEdit,"lineEdit_"+self.df["parameters"].iloc[i])
                 temp.setText(str(self.df['value'].iloc[i]))
 
-            #构造在panel上构造TableWidget
+            #构造在 panel上构造 tableWidget
             self.UAB = self.df["UAB"].dropna()
             self.UFD = self.df["UFD"].dropna()
             self.IFD = self.df["IFD"].dropna()
             temp = pd.DataFrame({'UAB':self.UAB,'UFD':self.UFD,'IFD':self.IFD})
+            #构造 tableWidget
             self.ui.tableWidget_RawData.setRowCount(temp.shape[0])
             self.ui.tableWidget_RawData.setColumnCount(temp.shape[1])
 
             for i in np.arange(temp.shape[0]):
                 for j in np.arange(temp.shape[1]):
                     self.ui.tableWidget_RawData.setItem(i, j,QtWidgets.QTableWidgetItem(str(temp.iloc[i, j])))  # 这里必须采用str强制转换
+            
             print("end UpdatePanelFromDataFrame")
 
         except Exception as e:
@@ -271,7 +273,7 @@ class Main(QtWidgets.QMainWindow):
     
     def UpdateDataFrameFromPanel(self):
         try:
-            print("begin UpdatePanelFromDataFrame")
+            print("begin UpdateDataFrameFromPanel")
 
             #保证csv表中的名称和ui中的名称一致，这样就好通过循环索引
             #将value中的变量值赋值给LineEdit对应的变量。不能使用iloc这种相对索引，应使用loc[i,string]这种绝对索引
@@ -285,7 +287,7 @@ class Main(QtWidgets.QMainWindow):
             # 动态改变tablewidget的行数，保证行数是动态改变，不再要求上升阶段的点数是固定的
             # 可以先在qt designer里面改一下，然后借鉴里面的写法，和利用Excel的宏一样
             # df.shape是一个tuple，第一个参数是行数，第二个参数是列数
-            
+
             #方法1
             for i in np.arange(rowcount):
                 self.df.loc[i,"UAB"] =  float(self.ui.tableWidget_RawData.item(i,0).text())
@@ -297,14 +299,12 @@ class Main(QtWidgets.QMainWindow):
             #    for j in np.arange(columncount-2):
             #        self.df.iloc[i,2+j] =  float(self.ui.tableWidget_RawData.item(i,j).text())
 
-            print("end UpdatePanelFromDataFrame")
-
+            print("end UpdateDataFrameFromPanel")
 
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数ss 
-
 
     def UpdateSelfFromDataFrame(self):
         try:
@@ -320,7 +320,7 @@ class Main(QtWidgets.QMainWindow):
             self.Falling1Ut,self.Falling1Ufd,self.Falling1Ifd,\
             self.Falling2Ut,self.Falling2Ufd,self.Falling2Ifd,\
             self.Rising1Angle,self.Rising2Angle,self.Falling1Angle,self.Falling2Angle,\
-            self.AngleAVGmin,self.AngleAVGmax,self.Umin,self.Umax],self.UAB,self.UFD,self.IFD] = temp
+            self.AngleAVGmin,self.AngleAVGmax,self.Umax,self.Umin],self.UAB,self.UFD,self.IFD] = temp
             
             print("end UpdateSelfFromDataFrame")
         except Exception as e:
@@ -340,9 +340,8 @@ class Main(QtWidgets.QMainWindow):
             self.Falling1Ut,self.Falling1Ufd,self.Falling1Ifd,\
             self.Falling2Ut,self.Falling2Ufd,self.Falling2Ifd,\
             self.Rising1Angle,self.Rising2Angle,self.Falling1Angle,self.Falling2Angle,\
-            self.AngleAVGmin,self.AngleAVGmax,self.Umin,self.Umax],self.UAB,self.UFD,self.IFD]
+            self.AngleAVGmin,self.AngleAVGmax,self.Umax,self.Umin],self.UAB,self.UFD,self.IFD]
             [self.df['value'],self.df['UAB'],self.df['UFD'],self.df['IFD'] ]= temp
-
 
             print("end UpdateDataFrameFromSelf")
         except Exception as e:
@@ -542,7 +541,7 @@ class Main(QtWidgets.QMainWindow):
             self.UFDB_seq = []
             self.KFD_seq = []
 
-            self.XcReal = self.ULN**2/self.STN*self.Uk  #有名值，不包含了换相导致的系数3/pi
+            self.XcReal = self.ULN**2/self.STN/10**3*self.Uk  #有名值，不包含了换相导致的系数3/pi
             self.XcRealEqual = self.XcReal*3.0/np.pi  #有名值，包含了换相导致的系数3/pi
 
             for i in np.arange(self.IFD_saturation_sq.__len__()):
@@ -567,9 +566,10 @@ class Main(QtWidgets.QMainWindow):
             self.XcpuEqual = self.XcRealEqual / (self.UFDB_std / self.IFDB_std)
 
             ###############################################################################
-            self.AngleScopeCalculate()
+            #计算后，更新是第一要务
             self.UpdateDataFrameFromSelf()
             self.UpdatePanelFromDataFrame()
+            self.AngleScopeCalculate()           
             self.ShowPlot()
             self.ShowResultsText()
 
