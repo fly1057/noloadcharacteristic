@@ -46,6 +46,7 @@ class Main(QtWidgets.QMainWindow):
                 self.df = pd.read_csv(openfile_name[0])
                 print(self.df)
             self.UpdatePanelFromDataFrame()
+            self.UpdateSelfFromDataFrame()
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
@@ -65,7 +66,7 @@ class Main(QtWidgets.QMainWindow):
                                                   QtWidgets.QMessageBox.Yes)
             else:
                 self.df.to_csv(openfile_name[0],index = False)
-            self.UpdatePanelFromDataFrame()
+
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
@@ -82,6 +83,7 @@ class Main(QtWidgets.QMainWindow):
                     }
             self.df = pd.DataFrame(data)
             self.UpdatePanelFromDataFrame()
+            self.UpdateSelfFromDataFrame()
 
             # 如果函数A内部有异常机制，那么可以随意在别的函数B里面调用A，不会影响函数B的流程
             # 也就是说在self.rmmpl()内有异常机制，调用这个函数如果出现了错误也只会报异常
@@ -245,15 +247,14 @@ class Main(QtWidgets.QMainWindow):
             # 可以先在qt designer里面改一下，然后借鉴里面的写法，和利用Excel的宏一样
             # df.shape是一个tuple，第一个参数是行数，第二个参数是列数
 
-            self.UAB = self.df["UAB"].dropna()
-            self.UFD = self.df["UFD"].dropna()
-            self.IFD = self.df["IFD"].dropna()
-
             for i  in  np.arange(len(self.df['value'])):
                 temp = self.findChild(QtWidgets.QLineEdit,"lineEdit_"+self.df["parameters"].iloc[i])
                 temp.setText(str(self.df['value'].iloc[i]))
 
             #构造在panel上构造TableWidget
+            self.UAB = self.df["UAB"].dropna()
+            self.UFD = self.df["UFD"].dropna()
+            self.IFD = self.df["IFD"].dropna()
             temp = pd.DataFrame({'UAB':self.UAB,'UFD':self.UFD,'IFD':self.IFD})
             self.ui.tableWidget_RawData.setRowCount(temp.shape[0])
             self.ui.tableWidget_RawData.setColumnCount(temp.shape[1])
@@ -262,7 +263,6 @@ class Main(QtWidgets.QMainWindow):
                 for j in np.arange(temp.shape[1]):
                     self.ui.tableWidget_RawData.setItem(i, j,QtWidgets.QTableWidgetItem(str(temp.iloc[i, j])))  # 这里必须采用str强制转换
             print("end UpdatePanelFromDataFrame")
-
 
         except Exception as e:
             print(e)
@@ -285,11 +285,18 @@ class Main(QtWidgets.QMainWindow):
             # 动态改变tablewidget的行数，保证行数是动态改变，不再要求上升阶段的点数是固定的
             # 可以先在qt designer里面改一下，然后借鉴里面的写法，和利用Excel的宏一样
             # df.shape是一个tuple，第一个参数是行数，第二个参数是列数
+            
+            #方法1
             for i in np.arange(rowcount):
-                for j in np.arange(columncount-2):
-                    self.df.iloc[i,2+j] =  float(self.ui.tableWidget_RawData.item(i,j).text())
-                #self.df.loc[i,"UFD"] =  float(self.ui.tableWidget_RawData.item(i,1).text())
-                #self.df.loc[i,"IFD"] =  float(self.ui.tableWidget_RawData.item(i,2).text())
+                self.df.loc[i,"UAB"] =  float(self.ui.tableWidget_RawData.item(i,0).text())
+                self.df.loc[i,"UFD"] =  float(self.ui.tableWidget_RawData.item(i,1).text())
+                self.df.loc[i,"IFD"] =  float(self.ui.tableWidget_RawData.item(i,2).text())
+
+            #方法2
+            #for i in np.arange(rowcount):
+            #    for j in np.arange(columncount-2):
+            #        self.df.iloc[i,2+j] =  float(self.ui.tableWidget_RawData.item(i,j).text())
+
             print("end UpdatePanelFromDataFrame")
 
 
@@ -299,64 +306,45 @@ class Main(QtWidgets.QMainWindow):
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数ss 
 
 
-    def UpdateSelfFromPanel(self):
+    def UpdateSelfFromDataFrame(self):
         try:
-            print("begin UpdateSelfFromPanel")
-            self.LinearScale = float(self.ui.lineEdit_LinearScale.text())
-            self.STN = float(self.ui.lineEdit_STN.text())*1000
-            self.Uk = float(self.ui.lineEdit_Uk.text())
-            self.ULN = float(self.ui.lineEdit_ULN.text())
-            self.IFDN = float(self.ui.lineEdit_IFDN.text())
-            self.UFDN =  float(self.ui.lineEdit_UFDN.text())
+            print("begin UpdateSelfFromDataFrame")
 
-            self.Rising1Ut = float(self.ui.lineEdit_Rising1Ut.text())
-            self.Rising1Ufd = float(self.ui.lineEdit_Rising1Ufd.text())
-            self.Rising1Ifd = float(self.ui.lineEdit_Rising1Ifd.text())
-            self.Rising2Ut = float(self.ui.lineEdit_Rising2Ut.text())
-            self.Rising2Ufd = float(self.ui.lineEdit_Rising2Ufd.text())
-            self.Rising2Ifd = float(self.ui.lineEdit_Rising2Ifd.text())
-
-            self.Falling1Ut = float(self.ui.lineEdit_Falling1Ut.text())
-            self.Falling1Ufd = float(self.ui.lineEdit_Falling1Ufd.text())
-            self.Falling1Ifd = float(self.ui.lineEdit_Falling1Ifd.text())
-            self.Falling2Ut = float(self.ui.lineEdit_Falling2Ut.text())
-            self.Falling2Ufd = float(self.ui.lineEdit_Falling2Ufd.text())
-            self.Falling2Ifd = float(self.ui.lineEdit_Falling2Ifd.text())
-
-            print("end UpdateSelfFromPanel")
+            temp = [self.df.loc[i,'value'] for i in np.arange(len(self.df['value']))]
+            temp =[temp,self.df['UAB'].dropna(),self.df['UFD'].dropna(),self.df['IFD'].dropna()]
+            [[self.STN,self.LinearScale,self.Uk,self.ULN,self.XcReal,self.XcRealEqual,self.XcpuEqual,\
+            self.IFDN,self.UFDN,self.IFDB_std,self.UFDB_std,self.KFD_std,self.UFDB_LL,self.KFD_LL,\
+            self.a,self.b,self.n,self.SG100,self.SG120,\
+            self.Rising1Ut,self.Rising1Ufd,self.Rising1Ifd,\
+            self.Rising2Ut,self.Rising2Ufd,self.Rising2Ifd,\
+            self.Falling1Ut,self.Falling1Ufd,self.Falling1Ifd,\
+            self.Falling2Ut,self.Falling2Ufd,self.Falling2Ifd,\
+            self.Rising1Angle,self.Rising2Angle,self.Falling1Angle,self.Falling2Angle,\
+            self.AngleAVGmin,self.AngleAVGmax,self.Umin,self.Umax],self.UAB,self.UFD,self.IFD] = temp
+            
+            print("end UpdateSelfFromDataFrame")
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
-    def UpdatePanelFromSelf(self):
+    def UpdateDataFrameFromSelf(self):
         try:
-            print("begin UpdatePanelFromSelf")
-            self.ui.lineEdit_XcReal.setText(str(self.XcReal))
-            self.ui.lineEdit_XcRealEqual.setText(str(self.XcRealEqual))
-            self.ui.lineEdit_XcpuEqual.setText(str(self.XcpuEqual))
-            self.ui.lineEdit_Rising1Angle.setText(str(self.Rising1Angle))
-            self.ui.lineEdit_Rising2Angle.setText(str(self.Rising2Angle))
-            self.ui.lineEdit_Falling1Angle.setText(str(self.Falling1Angle))
-            self.ui.lineEdit_Falling2Angle.setText(str(self.Falling2Angle))
-            self.ui.lineEdit_AngleAVGmax.setText(str(self.AngleAVGmax))
-            self.ui.lineEdit_AngleAVGmin.setText(str(self.AngleAVGmin))
+            print("begin UpdateDataFrameFromSelf")
 
-            self.ui.lineEdit_IFDB_std.setText(str(self.IFDB_std))
-            self.ui.lineEdit_UFDB_std.setText(str(self.UFDB_std))
-            self.ui.lineEdit_KFD_std.setText(str(self.KFD_std))
-            self.ui.lineEdit_UFDB_LL.setText(str(self.UFDB_LL))
-            self.ui.lineEdit_KFD_LL.setText(str(self.KFD_LL))
+            temp = [[self.STN,self.LinearScale,self.Uk,self.ULN,self.XcReal,self.XcRealEqual,self.XcpuEqual,\
+            self.IFDN,self.UFDN,self.IFDB_std,self.UFDB_std,self.KFD_std,self.UFDB_LL,self.KFD_LL,\
+            self.a,self.b,self.n,self.SG100,self.SG120,\
+            self.Rising1Ut,self.Rising1Ufd,self.Rising1Ifd,\
+            self.Rising2Ut,self.Rising2Ufd,self.Rising2Ifd,\
+            self.Falling1Ut,self.Falling1Ufd,self.Falling1Ifd,\
+            self.Falling2Ut,self.Falling2Ufd,self.Falling2Ifd,\
+            self.Rising1Angle,self.Rising2Angle,self.Falling1Angle,self.Falling2Angle,\
+            self.AngleAVGmin,self.AngleAVGmax,self.Umin,self.Umax],self.UAB,self.UFD,self.IFD]
+            [self.df['value'],self.df['UAB'],self.df['UFD'],self.df['IFD'] ]= temp
 
-            self.ui.lineEdit_Umax.setText(str(self.Umax))
-            self.ui.lineEdit_Umin.setText(str(self.Umin))
-            self.ui.lineEdit_a.setText(str(self.a))
-            self.ui.lineEdit_b.setText(str(self.b))
-            self.ui.lineEdit_n.setText(str(self.n))
-            self.ui.lineEdit_SG100.setText(str(self.SG100))
-            self.ui.lineEdit_SG120.setText(str(self.SG120))
 
-            print("end UpdatePanelFromSelf")
+            print("end UpdateDataFrameFromSelf")
         except Exception as e:
             print(e)
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
@@ -435,7 +423,9 @@ class Main(QtWidgets.QMainWindow):
             #5  nolinear fitting using all data to  get  a,b,n. This time we also using the data of UAB in step 2
             #6  calculate the IFD01.0 and IFD01.2 according to the a,b,n
             #7  calculate the KFD .   
-            self.UpdateSelfFromPanel() 
+
+            self.UpdateDataFrameFromPanel()
+            self.UpdateSelfFromDataFrame() 
             #（1） 选取前部分数据进行计算
             # 首先做一个判断，UAB是百分数还是标幺值，最终转换为标幺值
             if self.UAB.max() > 50:
@@ -578,8 +568,9 @@ class Main(QtWidgets.QMainWindow):
 
             ###############################################################################
             self.AngleScopeCalculate()
+            self.UpdateDataFrameFromSelf()
+            self.UpdatePanelFromDataFrame()
             self.ShowPlot()
-            self.UpdatePanelFromSelf()
             self.ShowResultsText()
 
         except Exception as e:
@@ -590,7 +581,8 @@ class Main(QtWidgets.QMainWindow):
     def AngleScopeCalculate(self):
         try:
             # 根据panel更新self
-            self.UpdateSelfFromPanel()
+            self.UpdateDataFrameFromPanel()
+            self.UpdateSelfFromDataFrame()
 
             self.Rising1Angle = 180/np.pi * \
                 np.arccos((self.Rising1Ufd + self.Rising1Ifd *self.XcRealEqual)/(1.35*self.ULN*self.Rising1Ut))
@@ -613,7 +605,8 @@ class Main(QtWidgets.QMainWindow):
                 np.cos(self.AngleAVGmax/180*np.pi) / self.UFDB_std
 
             # 根据self更新panel和text
-            self.UpdatePanelFromSelf()
+            self.UpdateDataFrameFromSelf()
+            self.UpdatePanelFromDataFrame()
             self.ShowResultsText()
         except Exception as e:
             print(e)
