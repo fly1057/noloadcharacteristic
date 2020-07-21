@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>121</width>
-      <height>191</height>
+      <height>231</height>
      </rect>
     </property>
     <property name="title">
@@ -30,9 +30,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>22</y>
+       <y>30</y>
        <width>111</width>
-       <height>165</height>
+       <height>191</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -75,6 +75,13 @@
        <widget class="QPushButton" name="pushButton_NoLoadCalculateSaveCSV">
         <property name="text">
          <string>保存CSV</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_NoLoadCalculateSaveDOCX">
+        <property name="text">
+         <string>保存DOCX</string>
         </property>
        </widget>
       </item>

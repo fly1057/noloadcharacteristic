@@ -15,6 +15,10 @@ from matplotlib.backends.backend_qt5agg import (
     NavigationToolbar2QT) 
 from scipy.optimize import least_squares, leastsq
 
+from docx import Document
+from docx.shared import Pt
+from docx.shared import Inches
+from docx.oxml.ns import qn
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
@@ -29,6 +33,7 @@ class Main(QtWidgets.QMainWindow):
         self.ui.pushButton_NoLoadCalculateSaveCSV.clicked.connect(self.NoLoadCalculateSaveCSV)
         self.ui.pushButton_Reset.clicked.connect(self.Reset)
         self.ui.pushButton_AngleScopeCalculate.clicked.connect(self.AngleScopeCalculate)
+        self.ui.pushButton_NoLoadCalculateSaveDOCX.clicked.connect(self.NoLoadCalculateSaveDOCX)
         #self.Reset()
 
     def NoLoadCalculateReadCSV(self):
@@ -66,6 +71,31 @@ class Main(QtWidgets.QMainWindow):
                                                   QtWidgets.QMessageBox.Yes)
             else:
                 self.df.to_csv(openfile_name[0],index = False)
+
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数    
+    
+    def NoLoadCalculateSaveDOCX(self):
+        try:
+            print("hello world! SaveCSV")
+
+            self.UpdateDataFrameFromPanel()                     
+            # 新建空白文档
+            doc1 = Document()
+            # 新增文档标题
+            doc1.add_heading('如何使用 Python 创建 Word',0)
+            openfile_name = QtWidgets.QFileDialog.getSaveFileName(
+                self, '选择文件', '', '(*.docx )')
+
+            # openfile_name是元组，第一个元素是路径
+            if openfile_name[0] == '':
+                QtWidgets.QMessageBox.information(self, "保存DOCX", "已经放弃保存文件",
+                                                  QtWidgets.QMessageBox.Yes)
+            else:
+                # 保存文件
+                doc1.save('word1.docx')
 
         except Exception as e:
             print(e)
