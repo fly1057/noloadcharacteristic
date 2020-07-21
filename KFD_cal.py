@@ -34,6 +34,7 @@ class Main(QtWidgets.QMainWindow):
         self.ui.pushButton_Reset.clicked.connect(self.Reset)
         self.ui.pushButton_AngleScopeCalculate.clicked.connect(self.AngleScopeCalculate)
         self.ui.pushButton_NoLoadCalculateSaveDOCX.clicked.connect(self.NoLoadCalculateSaveDOCX)
+        self.ui.pushButton_ExcitorTransformerCalculate.clicked.connect(self.ExcitorTransformerCalculator)
         #self.Reset()
 
     def NoLoadCalculateReadCSV(self):
@@ -593,7 +594,7 @@ class Main(QtWidgets.QMainWindow):
             self.KFD_std = 1.35*self.ULN/self.UFDB_std
             self.UFDB_LL = self.UFDB_seq[0]
             self.KFD_LL = self.KFD_seq[0]
-            self.XcpuEqual = self.XcRealEqual / (self.UFDN / self.IFDN)
+            self.XcpuEqual = self.XcRealEqual/(self.UFDN/self.IFDN)
             #在此处存在争议，关键是RFDB怎么算，暂且按照标准算，毕竟这个量相差较小，最终应该按我的来算
             #self.XcpuEqual = self.XcRealEqual / (self.UFDB_LL / self.IFDB_std)
 
@@ -610,6 +611,26 @@ class Main(QtWidgets.QMainWindow):
             print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
             print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
+    def  ExcitorTransformerCalculator(self):
+        
+        try:   
+            print("begin ExcitorTransformerCalculator") 
+            self.UpdateDataFrameFromPanel()
+            self.UpdateSelfFromDataFrame()
+
+            self.XcReal = self.ULN**2/self.STN/10**3*self.Uk  #有名值，不包含了换相导致的系数3/pi
+            self.XcRealEqual = self.XcReal*3.0/np.pi  #有名值，包含了换相导致的系数3/pi   
+            self.XcpuEqual = self.XcRealEqual/(self.UFDN/self.IFDN) 
+            
+            self.UpdateDataFrameFromSelf()
+            self.UpdatePanelFromDataFrame() 
+            print("end ExcitorTransformerCalculator") 
+
+        except Exception as e:
+            print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数 
+   
     def AngleScopeCalculate(self):
         try:
             # 根据panel更新self
