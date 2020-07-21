@@ -87,7 +87,7 @@ class Main(QtWidgets.QMainWindow):
             # 新增文档标题
             doc1.add_heading('如何使用 Python 创建 Word',0)
             openfile_name = QtWidgets.QFileDialog.getSaveFileName(
-                self, '选择文件', '', '(*.docx )')
+                self, '选择文件', '', '(*.docx ;*.doc)')
 
             # openfile_name是元组，第一个元素是路径
             if openfile_name[0] == '':
@@ -95,7 +95,7 @@ class Main(QtWidgets.QMainWindow):
                                                   QtWidgets.QMessageBox.Yes)
             else:
                 # 保存文件
-                doc1.save('word1.docx')
+                doc1.save(openfile_name[0])
 
         except Exception as e:
             print(e)
@@ -593,7 +593,9 @@ class Main(QtWidgets.QMainWindow):
             self.KFD_std = 1.35*self.ULN/self.UFDB_std
             self.UFDB_LL = self.UFDB_seq[0]
             self.KFD_LL = self.KFD_seq[0]
-            self.XcpuEqual = self.XcRealEqual / (self.UFDB_std / self.IFDB_std)
+            self.XcpuEqual = self.XcRealEqual / (self.UFDN / self.IFDN)
+            #在此处存在争议，关键是RFDB怎么算，暂且按照标准算，毕竟这个量相差较小，最终应该按我的来算
+            #self.XcpuEqual = self.XcRealEqual / (self.UFDB_LL / self.IFDB_std)
 
             ###############################################################################
             #计算后，更新是第一要务
