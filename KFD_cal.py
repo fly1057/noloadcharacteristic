@@ -82,11 +82,25 @@ class Main(QtWidgets.QMainWindow):
         try:
             print("hello world! SaveCSV")
 
-            self.UpdateDataFrameFromPanel()                     
+            self.UpdateDataFrameFromPanel()    
+            self.UpdateSelfFromDataFrame()                 
             # 新建空白文档
             doc1 = Document()
             # 新增文档标题
             doc1.add_heading('如何使用 Python 创建 Word',0)
+            doc1.add_paragraph('第一点：UAB(1)='+str(self.Rising1Ut)+'p.u.、UL(1)= '+str(self.Rising1Ut*self.ULN)+' V、UFD(1)='+str(self.Rising1Ufd)+'V、IFD(1)='+str(self.Rising1Ifd)+' A。计算得α= '+str(round(self.Rising1Angle,4))+'°。')
+            doc1.add_paragraph('第二点：UAB(2)='+str(self.Rising2Ut)+'p.u.、UL(2)= '+str(self.Rising2Ut*self.ULN)+' V、UFD(2)='+str(self.Rising2Ufd)+'V、IFD(2)='+str(self.Rising2Ifd)+' A。计算得α= '+str(round(self.Rising2Angle,4))+'°。')
+            doc1.add_paragraph('平均后得到最小α值：αMIN ='+str(round(self.AngleAVGmin,4))+'°。')
+            doc1.add_paragraph('第三点：UAB(3)='+str(self.Falling1Ut)+'p.u.、UL(3)= '+str(self.Falling1Ut*self.ULN)+' V、UFD(3)='+str(self.Falling1Ufd)+'V、IFD(3)='+str(self.Falling1Ifd)+' A。计算得α= '+str(round(self.Falling1Angle,4))+'°。')
+            doc1.add_paragraph('第四点：UAB(4)='+str(self.Falling2Ut)+'p.u.、UL(4)= '+str(self.Falling2Ut*self.ULN)+' V、UFD(4)='+str(self.Falling2Ufd)+'V、IFD(4)='+str(self.Falling2Ifd)+' A。计算得α= '+str(round(self.Falling2Angle,4))+'°。')
+            doc1.add_paragraph('平均后得到最大α值：αMAX='+str(round(self.AngleAVGmax,4))+'°。')
+            doc1.add_paragraph('由以上得到可控硅最小控制角、最大控制角分别为'+str(round(self.AngleAVGmin,4))+'°和'+str(round(self.AngleAVGmax,4))+'°，励磁变低压侧额定电压为'+str()+'V。对自并励励磁系统，电压调节器最大输出电压VRMAX和最小输出电压VRMIN也就是励磁系统的最大、最小输出电压，是发电机端电压等于额定值时的最大、最小输出电压。')
+            doc1.add_paragraph('最大输出电压为:')
+            doc1.add_paragraph('VRMAX=1.35×Ul×COSαmin='+str(round(1.35*self.ULN*np.cos(self.AngleAVGmin*180/np.pi),4))+'V')
+            doc1.add_paragraph('标幺值为：VRMAX/UFDB='+str(round(self.Umax,4))+'p.u.')
+            doc1.add_paragraph('最小输出电压为：')
+            doc1.add_paragraph('VRMIN=1.35×Ul×COSαmax='+str(round(1.35*self.ULN*np.cos(self.AngleAVGmax*180/np.pi),4))+'V')
+            doc1.add_paragraph('标幺值为：VRMIN/UFDB='+str(round(self.Umin,4))+'p.u.')
             openfile_name = QtWidgets.QFileDialog.getSaveFileName(
                 self, '选择文件', '', '(*.docx ;*.doc)')
 
@@ -227,23 +241,23 @@ class Main(QtWidgets.QMainWindow):
                        horizontalalignment='center',
                        verticalalignment='center')
 
-            ax1f1.text(self.IFD_air_100_value / 2,
-                       1,
-                       'IFDB_std=' + str(round(self.IFDB_std, 1)) + "A",
-                       horizontalalignment='center',
-                       verticalalignment='center')
+            #ax1f1.text(self.IFD_air_100_value / 2,
+            #           1,
+            #           'IFDB_std=' + str(round(self.IFDB_std, 1)) + "A",
+            #           horizontalalignment='center',
+            #           verticalalignment='center')
 
-            ax1f1.text(self.IFD_air_100_value / 2,
-                       0.9,
-                       'UFDB_std=' + str(round(self.UFDB_std, 1)) + "V",
-                       horizontalalignment='center',
-                       verticalalignment='center')
+            #ax1f1.text(self.IFD_air_100_value / 2,
+            #           0.9,
+            #           'UFDB_std=' + str(round(self.UFDB_std, 1)) + "V",
+            #           horizontalalignment='center',
+            #           verticalalignment='center')
 
-            ax1f1.text(self.IFD_air_100_value / 2,
-                       0.8,
-                       'KFD_std=' + str(round(self.KFD_std, 2)),
-                       horizontalalignment='center',
-                       verticalalignment='center')
+            #ax1f1.text(self.IFD_air_100_value / 2,
+            #           0.8,
+            #           'KFD_std=' + str(round(self.KFD_std, 2)),
+            #           horizontalalignment='center',
+            #           verticalalignment='center')
 
             #ax1f1.text(self.IFD_air_100_value / 2,
             #           0.7,
@@ -652,10 +666,8 @@ class Main(QtWidgets.QMainWindow):
             self.AngleAVGmax = np.average(
                 [self.Falling1Angle, self.Falling2Angle])
 
-            self.Umax = 1.35*self.ULN * \
-                np.cos(self.AngleAVGmin/180*np.pi) / self.UFDB_std
-            self.Umin = 1.35*self.ULN * \
-                np.cos(self.AngleAVGmax/180*np.pi) / self.UFDB_std
+            self.Umax = 1.35*self.ULN * np.cos(self.AngleAVGmin/180*np.pi) / self.UFDB_std
+            self.Umin = 1.35*self.ULN * np.cos(self.AngleAVGmax/180*np.pi) / self.UFDB_std
 
             # 根据self更新panel和text
             self.UpdateDataFrameFromSelf()
