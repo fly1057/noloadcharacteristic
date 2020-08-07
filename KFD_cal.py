@@ -102,7 +102,7 @@ class Main(QtWidgets.QMainWindow):
             doc1.add_paragraph('VRMIN=1.35×Ul×COSαmax='+str(round(1.35*self.ULN*np.cos(self.AngleAVGmax*180/np.pi),4))+'V')
             doc1.add_paragraph('标幺值为：VRMIN/UFDB='+str(round(self.Umin,4))+'p.u.')
             openfile_name = QtWidgets.QFileDialog.getSaveFileName(
-                self, '选择文件', '', '(*.docx ;*.doc)')
+                self, '选择文件', '', '(*.docx ;*.doc)') 
 
             # openfile_name是元组，第一个元素是路径
             if openfile_name[0] == '':
