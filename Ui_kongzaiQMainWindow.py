@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/fly1057/桌面/noloadcharacteristic/kongzaiQMainWindow.ui'
+# Form implementation generated from reading ui file '/home/fly1057/Documents/python_projects/noloadcharacteristic/kongzaiQMainWindow.ui'
 #
 # Created by: PyQt5 UI code generator 5.9.2
 #
@@ -59,7 +59,7 @@ class Ui_MainWindow(object):
         self.groupBox_ExciterTransferCalculate.setGeometry(QtCore.QRect(140, 10, 191, 231))
         self.groupBox_ExciterTransferCalculate.setObjectName("groupBox_ExciterTransferCalculate")
         self.layoutWidget_3 = QtWidgets.QWidget(self.groupBox_ExciterTransferCalculate)
-        self.layoutWidget_3.setGeometry(QtCore.QRect(10, 30, 171, 171))
+        self.layoutWidget_3.setGeometry(QtCore.QRect(10, 30, 171, 172))
         self.layoutWidget_3.setObjectName("layoutWidget_3")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.layoutWidget_3)
         self.horizontalLayout.setSizeConstraint(QtWidgets.QLayout.SetNoConstraint)
@@ -163,7 +163,7 @@ class Ui_MainWindow(object):
         self.groupBox_ControlAngleCalculate.setCheckable(False)
         self.groupBox_ControlAngleCalculate.setObjectName("groupBox_ControlAngleCalculate")
         self.layoutWidget1 = QtWidgets.QWidget(self.groupBox_ControlAngleCalculate)
-        self.layoutWidget1.setGeometry(QtCore.QRect(10, 70, 97, 131))
+        self.layoutWidget1.setGeometry(QtCore.QRect(10, 70, 101, 131))
         self.layoutWidget1.setObjectName("layoutWidget1")
         self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.layoutWidget1)
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -466,7 +466,7 @@ class Ui_MainWindow(object):
         self.gridLayout_2.addWidget(self.lineEdit_SG120, 5, 3, 1, 1)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1261, 18))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1261, 20))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -530,14 +530,4 @@ class Ui_MainWindow(object):
         self.label_28.setText(_translate("MainWindow", "SG100"))
         self.label_32.setText(_translate("MainWindow", "KFD_LL"))
         self.label_31.setText(_translate("MainWindow", "SG120"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
 
