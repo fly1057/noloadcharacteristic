@@ -709,6 +709,9 @@
         <property name="text">
          <string/>
         </property>
+        <property name="maxLength">
+         <number>6</number>
+        </property>
        </widget>
       </item>
       <item row="0" column="2">
@@ -735,6 +738,9 @@
         <property name="text">
          <string/>
         </property>
+        <property name="maxLength">
+         <number>6</number>
+        </property>
        </widget>
       </item>
       <item row="1" column="0">
@@ -747,7 +753,7 @@
       <item row="1" column="1">
        <widget class="QLineEdit" name="lineEdit_IFDB_std">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -761,7 +767,7 @@
       <item row="1" column="3">
        <widget class="QLineEdit" name="lineEdit_a">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -775,7 +781,7 @@
       <item row="2" column="1">
        <widget class="QLineEdit" name="lineEdit_UFDB_std">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -789,7 +795,7 @@
       <item row="2" column="3">
        <widget class="QLineEdit" name="lineEdit_b">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -876,7 +882,7 @@
       <item row="3" column="1">
        <widget class="QLineEdit" name="lineEdit_KFD_std">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -890,7 +896,7 @@
       <item row="3" column="3">
        <widget class="QLineEdit" name="lineEdit_n">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -907,7 +913,7 @@
       <item row="4" column="1">
        <widget class="QLineEdit" name="lineEdit_UFDB_LL">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -921,7 +927,7 @@
       <item row="4" column="3">
        <widget class="QLineEdit" name="lineEdit_SG100">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -1008,7 +1014,7 @@
       <item row="5" column="1">
        <widget class="QLineEdit" name="lineEdit_KFD_LL">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
@@ -1022,7 +1028,7 @@
       <item row="5" column="3">
        <widget class="QLineEdit" name="lineEdit_SG120">
         <property name="maxLength">
-         <number>7</number>
+         <number>5</number>
         </property>
        </widget>
       </item>
